@@ -1,0 +1,4172 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 🌟 Background Effect (Put this at the very TOP of your <body>) -->
+<div id="gold-bg">
+  <div class="scroll-track"></div>
+  <div class="stars"></div>
+</div>
+
+<!-- 🌟 Add this inside your <head> (styles only once) -->
+<style>
+  #gold-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -9999; /* stays behind everything */
+  }
+
+  .scroll-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      -45deg,
+      gold,
+      #f5d142,
+      #111,
+      silver,
+      #000,
+      gold
+    );
+    background-size: 400% 400%;
+    animation: gradientFlow 25s linear infinite;
+    z-index: -2;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    box-shadow: 0 0 6px gold, 0 0 12px yellow;
+    animation: twinkle 6s infinite ease-in-out alternate,
+               fall 20s linear infinite;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); }
+  }
+</style>
+
+<!-- 🌟 Add this before </body> -->
+<script>
+  // Generate falling stars dynamically
+  const starContainer = document.querySelector('#gold-bg .stars');
+  const starCount = 100; // number of stars
+
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.top = Math.random() * 100 + '%';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.animationDuration = (5 + Math.random() * 10) + 's, ' + 
+                                   (15 + Math.random() * 10) + 's';
+    starContainer.appendChild(star);
+  }
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coins Loader</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #111;
+      color: gold;
+    }
+
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .Coins-logo {
+      font-size: 50px;
+      color: gold;
+      background-color: rgba(255, 215, 0, 0.1);
+      border: 2px solid gold;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .dots span {
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+      margin: 0 4px;
+      background: gold;
+      border-radius: 50%;
+      animation: blink 1.4s infinite both;
+    }
+
+    .dots span:nth-child(2) { animation-delay: 0.2s; }
+    .dots span:nth-child(3) { animation-delay: 0.4s; }
+    .dots span:nth-child(4) { animation-delay: 0.6s; }
+    .dots span:nth-child(5) { animation-delay: 0.8s; }
+
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.2; }
+      40% { opacity: 1; }
+    }
+
+    .meta-text {
+      margin-top: 20px;
+      color: gold;
+      font-size: 14px;
+    }
+
+    #main-content {
+      display: none;
+      padding: 30px;
+      color: white;
+    }
+  </style>
+ 
+     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title> — Menu + Translate</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --panel: #111;
+      --gold: #d4af37;
+      --gold-weak: #ffdd55;
+      --muted: #999;
+      --white: #fff;
+      --lemon: #32CD32; /* lemon green */
+    }
+    html,body { height:100%; margin:0; font-family:Arial,system-ui,-apple-system; background:var(--bg); color:var(--white); }
+
+    /* hamburger (lemon green smaller lines, moved down a little) */
+    .hamburger {
+      position: fixed;
+      top: 38px;
+      right: 18px;
+      width:34px; height:34px;
+      display:flex; flex-direction:column; justify-content:center; gap:3px;
+      z-index:1200;
+      cursor:pointer;
+      background:transparent;
+      border-radius:8px;
+      transition: opacity .3s, transform .3s;
+    }
+    .hamburger div {
+      height:2px; width:18px;
+      background:var(--lemon);
+      border-radius:2px;
+      transition: all .25s ease;
+      margin:0 auto;
+    }
+    .hamburger.hide { opacity:0; transform:scale(0.5); pointer-events:none; }
+
+    /* red cross button */
+    .close-btn {
+      position: fixed;
+      top: 46px;
+      right: 20px;
+      font-size:28px;
+      color:red;
+      z-index:1250;
+      cursor:pointer;
+      opacity:0;
+      transform:scale(0.5);
+      pointer-events:none;
+      transition:opacity .3s, transform .3s;
+    }
+    .close-btn.show { opacity:1; transform:scale(1); pointer-events:auto; }
+
+    /* full-screen slide menu */
+    .menu {
+      position: fixed;
+      top: 0; right: -120%;
+      width:100%; height:100%; max-width:600px;
+      background:var(--panel);
+      z-index:1100;
+      padding:42px 22px 22px; /* extra space at top inside menu */
+      box-sizing:border-box;
+      transition: right .36s cubic-bezier(.2,.9,.2,1);
+      overflow:auto;
+    }
+    .menu.show { right: 0; }
+
+    /* Menu header (Translation inside menu) */
+    .menu-header {
+      display:flex; flex-direction:column; gap:8px; margin-bottom:14px;
+      padding-bottom:12px; border-bottom:1px solid rgba(255,215,0,0.06);
+    }
+    .menu-header .label {
+      background:var(--gold);
+      color:#000; font-weight:800; font-size:14px;
+      display:flex; gap:8px; align-items:center;
+      padding:6px 10px; border-radius:6px;
+    }
+    .menu-header select {
+      width:100%; padding:8px 10px; border-radius:8px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:#0b0b0b; color:var(--white); font-weight:700;
+    }
+    .menu-header .explain { color:var(--muted); font-size:13px; margin-top:4px; }
+
+    /* menu buttons */
+    .tab-btn {
+      display:flex; align-items:center; gap:12px;
+      width:100%; text-align:left; padding:12px 10px; border-radius:8px;
+      background:transparent; border:none; color:var(--gold); font-size:16px;
+      margin:8px 0; cursor:pointer;
+    }
+    .tab-btn i { width:22px; text-align:center; color:var(--gold-weak); font-size:18px; }
+    .tab-btn:hover { background:#121212; transform:translateX(4px); }
+    .tab-btn.active { background:#222; }
+
+    .tab-content {
+      margin:18px 0 60px 0; padding:14px; border-radius:10px;
+      background:#0d0d0d; border:1px solid rgba(212,175,55,0.06); color:#ddd;
+      line-height:1.5; font-size:15px;
+    }
+
+    @media(min-width:820px){
+      .menu { width:420px; right:-100%; border-left:6px solid rgba(212,175,55,0.05); }
+    }
+  </style>
+</head>
+
+<!-- Online/Offline Status + Overlay -->
+<div id="status-indicator">
+  <span id="c-symbol">⚡</span>
+</div>
+<div id="offline-overlay">
+  <span></span>
+</div>
+
+<style>
+  /* Removed forced black background + overflow hidden */
+  body {
+    margin: 0;
+  }
+
+  /* Floating small coins logos */
+  .floating- {
+    position: fixed;
+    font-size: 14px;
+    color: #1E90FF; /* blue */
+    animation: float 8s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+  }
+
+  /* Status dot */
+  #status-indicator {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #00FF00;
+    box-shadow: 0 0 6px rgba(0,0,0,0.5);
+    z-index: 10000;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    color: #FFD700; /* Yellow coins symbol */
+  }
+
+  #coins-symbol {
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 6px #00FF00; }
+    50% { transform: scale(1.2); box-shadow: 0 0 15px #00FF00; }
+    100% { transform: scale(1); box-shadow: 0 0 6px #00FF00; }
+  }
+
+
+
+  /* Popup tooltip */
+  #status-popup {
+    display: none;
+    position: fixed;
+    top: 50px;
+    left: 15px;
+    width: 280px;
+    background: #000;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 10001;
+    box-shadow: 0 0 12px rgba(255,215,0,0.5);
+  }
+
+  .lifetime {
+    margin-top: 10px;
+    color: #FFD700;
+    font-weight: bold;
+  }
+</style>
+
+<!-- Popup container -->
+<div id="status-popup">
+  <div id="connection-text" style="color:#00FF00; font-weight:bold;">
+    ✅ Your connection is good, you are online right now.
+  </div>
+  <div id="lifetime" class="lifetime"></div>
+</div>
+
+<script>
+  let miningInterval;
+  let startTime = new Date();
+
+  // Sound effect
+  function playClickSound() {
+    const audio = new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg");
+    audio.volume = 1.0;
+    audio.play();
+  }
+
+  function startMining() {
+    if (!miningInterval) {
+      miningInterval = setInterval(() => {}, 1000);
+    }
+  }
+
+  function stopMining() {
+    clearInterval(miningInterval);
+    miningInterval = null;
+  }
+
+  function checkConnection() {
+    const overlay = document.getElementById("offline-overlay");
+    const indicator = document.getElementById("status-indicator");
+
+    if (navigator.onLine) {
+      overlay.style.display = "none";          
+      indicator.style.background = "#00FF00";  
+      startMining();
+    } else {
+      overlay.style.display = "flex";          
+      indicator.style.background = "#FF0000";  
+      stopMining();
+    }
+  }
+
+  // Lifetime tracker
+  function updateLifetime() {
+    const now = new Date();
+    const diff = Math.floor((now - startTime) / 1000);
+    const days = Math.floor(diff / 86400);
+    const hours = Math.floor((diff % 86400) / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+    const dateStr = startTime.toLocaleString();
+
+    document.getElementById("lifetime").innerHTML = 
+      `⏳ Started: ${dateStr}<br>📊 Lifetime: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  setInterval(updateLifetime, 1000);
+
+  // Popup behavior
+  const statusDot = document.getElementById("status-indicator");
+  const popup = document.getElementById("status-popup");
+
+  statusDot.addEventListener("click", () => {
+    if (navigator.onLine) {
+      playClickSound();
+      popup.style.display = "block";
+      setTimeout(() => { popup.style.display = "none"; }, 5000);
+    }
+  });
+
+  // Add floating blue Coins icons
+  function spawnFloating() {
+    const b = document.createElement("div");
+    Coins.className = "floating-Coins";
+    Coins.innerText = "⚡";
+    Coins.style.left = Math.random() * 100 + "vw";
+    Coins.style.animationDuration = (6 + Math.random() * 5) + "s";
+    document.body.appendChild(Coinsc);
+    setTimeout(() => Coins.remove(), 11000);
+  }
+  setInterval(spawnFloatingBCoins, 1500);
+
+  checkConnection();
+  window.addEventListener("online", checkConnection);
+  window.addEventListener("offline", checkConnection);
+</script> 
+                                 
+<body> 
+    
+
+
+
+  <!-- Hamburger -->
+  <div class="hamburger" id="hamburger" aria-label="Open menu" title="Open menu" role="button" tabindex="0">
+    <div></div><div></div><div></div>
+  </div>
+
+  <!-- Red Cross -->
+  <div class="close-btn" id="closeBtn" role="button" aria-label="Close menu">✕</div>
+
+  <!-- Slide Menu -->
+  <aside class="menu" id="menu" aria-hidden="true">
+    <!-- TRANSLATION -->
+    <div class="menu-header" aria-label="Translation panel">
+      <div class="label"><i class="fas fa-language"></i> Translation</div>
+      <select id="languageSelect" aria-label="Choose language">
+        <!-- 100 language / country options -->
+        <option value="en" selected>🇺🇸 English (United States)</option>
+        <option value="en-GB">🇬🇧 English (United Kingdom)</option>
+        <option value="en-AU">🇦🇺 English (Australia)</option>
+        <option value="en-CA">🇨🇦 English (Canada)</option>
+        <option value="es">🇪🇸 Spanish</option>
+        <option value="es-MX">🇲🇽 Spanish (Mexico)</option>
+        <option value="es-AR">🇦🇷 Spanish (Argentina)</option>
+        <option value="es-CO">🇨🇴 Spanish (Colombia)</option>
+        <option value="fr">🇫🇷 French</option>
+        <option value="fr-CA">🇨🇦 French (Canada)</option>
+        <option value="de">🇩🇪 German</option>
+        <option value="it">🇮🇹 Italian</option>
+        <option value="pt">🇵🇹 Portuguese (Portugal)</option>
+        <option value="pt-BR">🇧🇷 Portuguese (Brazil)</option>
+        <option value="ru">🇷🇺 Russian</option>
+        <option value="uk">🇺🇦 Ukrainian</option>
+        <option value="pl">🇵🇱 Polish</option>
+        <option value="nl">🇳🇱 Dutch</option>
+        <option value="sv">🇸🇪 Swedish</option>
+        <option value="no">🇳🇴 Norwegian</option>
+        <option value="da">🇩🇰 Danish</option>
+        <option value="fi">🇫🇮 Finnish</option>
+        <option value="el">🇬🇷 Greek</option>
+        <option value="cs">🇨🇿 Czech</option>
+        <option value="sk">🇸🇰 Slovak</option>
+        <option value="hu">🇭🇺 Hungarian</option>
+        <option value="ro">🇷🇴 Romanian</option>
+        <option value="bg">🇧🇬 Bulgarian</option>
+        <option value="sr">🇷🇸 Serbian</option>
+        <option value="hr">🇭🇷 Croatian</option>
+        <option value="sl">🇸🇮 Slovenian</option>
+        <option value="et">🇪🇪 Estonian</option>
+        <option value="lv">🇱🇻 Latvian</option>
+        <option value="lt">🇱🇹 Lithuanian</option>
+        <option value="is">🇮🇸 Icelandic</option>
+        <option value="ga">🇮🇪 Irish</option>
+        <option value="mt">🇲🇹 Maltese</option>
+        <option value="sq">🇦🇱 Albanian</option>
+        <option value="mk">🇲🇰 Macedonian</option>
+        <option value="bs">🇧🇦 Bosnian</option>
+        <option value="be">🇧🇾 Belarusian</option>
+        <option value="hy">🇦🇲 Armenian</option>
+        <option value="ka">🇬🇪 Georgian</option>
+        <option value="az">🇦🇿 Azerbaijani</option>
+        <option value="kk">🇰🇿 Kazakh</option>
+        <option value="uz">🇺🇿 Uzbek</option>
+        <option value="ky">🇰🇬 Kyrgyz</option>
+        <option value="mn">🇲🇳 Mongolian</option>
+        <option value="ne">🇳🇵 Nepali</option>
+        <option value="si">🇱🇰 Sinhala</option>
+        <option value="my">🇲🇲 Burmese</option>
+        <option value="km">🇰🇭 Khmer</option>
+        <option value="lo">🇱🇦 Lao</option>
+        <option value="th">🇹🇭 Thai</option>
+        <option value="vi">🇻🇳 Vietnamese</option>
+        <option value="id">🇮🇩 Indonesian</option>
+        <option value="ms">🇲🇾 Malay</option>
+        <option value="tl">🇵🇭 Filipino (Tagalog)</option>
+        <option value="ceb">🇵🇭 Cebuano</option>
+        <option value="jw">🇮🇩 Javanese</option>
+        <option value="su">🇮🇩 Sundanese</option>
+        <option value="ja">🇯🇵 Japanese</option>
+        <option value="ko">🇰🇷 Korean</option>
+        <option value="zh-CN">🇨🇳 Chinese (Simplified)</option>
+        <option value="zh-TW">🇹🇼 Chinese (Traditional)</option>
+        <option value="hi">🇮🇳 Hindi</option>
+        <option value="bn">🇧🇩 Bengali</option>
+        <option value="ur">🇵🇰 Urdu</option>
+        <option value="fa">🇮🇷 Persian (Farsi)</option>
+        <option value="ar">🇸🇦 Arabic (Standard)</option>
+        <option value="pa">🇮🇳 Punjabi</option>
+        <option value="gu">🇮🇳 Gujarati</option>
+        <option value="mr">🇮🇳 Marathi</option>
+        <option value="ta">🇮🇳 Tamil</option>
+        <option value="te">🇮🇳 Telugu</option>
+        <option value="kn">🇮🇳 Kannada</option>
+        <option value="ml">🇮🇳 Malayalam</option>
+        <option value="or">🇮🇳 Odia</option>
+        <option value="as">🇮🇳 Assamese</option>
+        <option value="ps">🇦🇫 Pashto</option>
+        <option value="tg">🇹🇯 Tajik</option>
+        <option value="tk">🇹🇲 Turkmen</option>
+        <option value="lb">🇱🇺 Luxembourgish</option>
+        <option value="eo">🌐 Esperanto</option>
+        <option value="sw">🇰🇪 Swahili</option>
+        <option value="am">🇪🇹 Amharic</option>
+        <option value="so">🇸🇴 Somali</option>
+        <option value="ht">🇭🇹 Haitian Creole</option>
+        <option value="qu">🇵🇪 Quechua</option>
+        <option value="gn">🇵🇾 Guarani</option>
+        <option value="fy">🇳🇱 Frisian</option>
+        <option value="yi">🌐 Yiddish</option>
+        <option value="yo">🇳🇬 Yoruba</option>
+        <option value="ig">🇳🇬 Igbo</option>
+        <option value="ha">🇳🇬 Hausa</option>
+        <option value="zu">🇿🇦 Zulu</option>
+        <option value="xh">🇿🇦 Xhosa</option>
+      </select>
+      <div class="explain">Pick your country & language to auto-translate.</div>
+    </div>
+
+
+
+  <!-- Menu items -->
+    <button class="tab-btn" onclick="showTab('how', this)"><i class="fas fa-play-circle"></i> How to Start</button>
+    <button class="tab-btn" onclick="showTab('blog', this)"><i class="fas fa-blog"></i> Blog</button>
+    <button class="tab-btn" onclick="showTab('education', this)"><i class="fas fa-graduation-cap"></i> Education</button>
+    <button class="tab-btn" onclick="showTab('rewards', this)"><i class="fas fa-point"></i> rewards</button>
+    <button class="tab-btn" onclick="showTab('faq', this)"><i class="fas fa-question-circle"></i> FAQ</button>
+    <button class="tab-btn" onclick="showTab('community', this)"><i class="fas fa-users"></i> Community</button>
+    <button class="tab-btn" onclick="showTab('terms', this)"><i class="fas fa-file-contract"></i> Terms</button>
+    <button class="tab-btn" onclick="showTab('privacy', this)"><i class="fas fa-shield-alt"></i> Privacy</button>
+    <button class="tab-btn" onclick="showTab('contact', this)"><i class="fas fa-envelope"></i> Contact</button>
+    <button class="tab-btn" onclick="showTab('Points', this)"><i class="fas fa-coins"></i> Points</button>
+
+    <div class="tab-content" id="tab-content">
+      <p>🚀 Welcome to NovaSpin Start instantly Choose an option and watch rewards update as you play.</p>
+    </div>
+  </aside>
+
+  <!-- Hidden Google Translate element -->
+  <div id="google_translate_element" style="display:none"></div>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+    const closeBtn = document.getElementById('closeBtn');
+
+    function openMenu(){
+      menu.classList.add('show');
+      hamburger.classList.add('hide');
+      closeBtn.classList.add('show');
+    }
+    function closeMenu(){
+      menu.classList.remove('show');
+      hamburger.classList.remove('hide');
+      closeBtn.classList.remove('show');
+    }
+
+    hamburger.addEventListener('click', openMenu);
+    closeBtn.addEventListener('click', closeMenu);
+
+    function showTab(tabName, element){
+      const content = {
+        how: "🚀 No sign up needed. Pick a mode and enjoy smooth gameplay anytime.",
+        blog: "📰 Get the latest updates, tips, and general information related to digital assets.",
+        education: "📚 Easy to follow guides and learning resources designed for users at all levels.",
+        rewards: "🎰 rewards in-app points for entertainment purposes only.",
+        faq: "❓ Helpful tips and commonly asked questions.",
+        community: "🤝 Join our Novaspin community and connect worldwide.",
+        terms: "📄 Clear terms and conditions.",
+        privacy: "🔒 Your privacy is respected and handled with care.",
+        contact: "📩 Contact: novaspinofficial@gmail.com",
+        Points: "🌟 Explore plans, rewards, and how you progress."
+      };
+      document.getElementById('tab-content').innerHTML = `<p>${content[tabName]}</p>`;
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('activeDark Mode'));
+      element.classList.add('active');
+    }
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element');
+    }
+
+    const languageSelect = document.getElementById('languageSelect');
+    languageSelect.addEventListener('change', () => {
+      const lang = languageSelect.value;
+      const combo = document.querySelector('.goog-te-combo');
+      if(combo){ combo.value = lang; combo.dispatchEvent(new Event('change')); }
+    });
+
+    (function loadGT(){
+      const s = document.createElement('script');
+      s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      s.async = true;
+      document.head.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
+<style>
+/* Adjust hamburger position slightly upward */
+.hamburger {
+    margin-top: -10px !important;
+}
+
+/* Make the three lines premium lemon-green */
+.hamburger div {
+    background: #32ff7e !important;
+}
+</style>
+</head>
+<body>
+    
+    
+    
+    
+    
+    <div id="welcome-text">Welcome</div>
+
+<style>
+  #welcome-text {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin: 16px auto;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.35s ease;
+    background: transparent; /* fully transparent */
+  }
+</style>
+
+<script>
+  (function () {
+    const colors = [
+      "gold",
+      "limegreen",
+      "blue",
+      "yellow",
+      "orange",
+      "purple",
+      "silver",
+      "red",
+      "white"
+    ];
+
+    const welcome = document.getElementById("welcome-text");
+
+    if (!welcome) return;
+
+    // Get saved color index or default
+    let colorIndex = parseInt(localStorage.getItem("welcomeColorIndex")) || 0;
+
+    function applyColor() {
+      welcome.style.color = colors[colorIndex];
+      localStorage.setItem("welcomeColorIndex", colorIndex);
+    }
+
+    // Change color on click
+    welcome.addEventListener("click", () => {
+      colorIndex = Math.floor(Math.random() * colors.length);
+      applyColor();
+    });
+
+    // Change color automatically every 1 hour
+    setInterval(() => {
+      colorIndex = (colorIndex + 1) % colors.length;
+      applyColor();
+    }, 3600000); // 1 hour
+
+    // Initial apply
+    applyColor();
+  })();
+</script>
+ 
+ 
+ 
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wheel of Rewards</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #0b0b0b;
+      color: white;
+    }
+
+    .wheel-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 20px;
+    }
+
+    h2 {
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    #spinsLeft, #resetTimer {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    #spinsLeft {
+      color: #32CD32;
+    }
+
+    #resetTimer {
+      color: #FFD700;
+    }
+
+    canvas {
+      background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
+      border-radius: 50%;
+      border: 12px solid #333;
+      max-width: 90vw;
+      height: auto;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+    }
+
+    #spinBtn {
+      margin-top: 20px;
+      padding: 14px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(45deg, #32CD32, #28a428);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 15px #32CD32;
+      transition: transform 0.3s;
+    }
+    #spinBtn:hover { transform: scale(1.1); }
+
+    #resultBox {
+      margin-top: 20px;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      background: rgba(0,0,0,0.7);
+      color: gold;
+      box-shadow: 0 0 15px gold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+
+
+
+  <div class="wheel-container">
+    <h2>🎰 Spin the Wheel & Collect Rewards 🎰</h2>
+    <div id="spinsLeft"></div>
+    <div id="resetTimer"></div>
+    <canvas id="wheel" width="400" height="400"></canvas>
+    <button id="spinBtn">Spin</button>
+    <div id="resultBox"></div>
+  </div>
+
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- Sounds -->
+  <audio id="winSound" preload="auto">
+    <source src="https://www.soundjay.com/button/sounds/button-16.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="spinMusic" preload="auto" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const canvas = document.getElementById("wheel");
+    const ctx = canvas.getContext("2d");
+    const spinBtn = document.getElementById("spinBtn");
+    const winSound = document.getElementById("winSound");
+    const spinMusic = document.getElementById("spinMusic");
+    const resultBox = document.getElementById("resultBox");
+    const spinsLeftEl = document.getElementById("spinsLeft");
+    const resetTimerEl = document.getElementById("resetTimer");
+
+    const MAX_SPINS = 20;
+
+    // Get midnight reset time
+    function getMidnight() {
+      let now = new Date();
+      let midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0);
+      return midnight;
+    }
+
+    // Load spins left from localStorage
+    let today = new Date().toLocaleDateString();
+    let storedData = JSON.parse(localStorage.getItem("spinData")) || {};
+    if (storedData.date !== today) {
+      storedData = { date: today, spins: MAX_SPINS };
+      localStorage.setItem("spinData", JSON.stringify(storedData));
+    }
+    let spinsLeft = storedData.spins;
+
+    function updateSpinsDisplay() {
+      spinsLeftEl.textContent = `🎯 Spins Left Today: ${spinsLeft}/${MAX_SPINS}`;
+    }
+    updateSpinsDisplay();
+
+    // Countdown timer
+    function updateResetTimer() {
+      let now = new Date();
+      let midnight = getMidnight();
+      let diff = midnight - now;
+
+      let hours = Math.floor(diff / 1000 / 60 / 60);
+      let minutes = Math.floor((diff / 1000 / 60) % 60);
+      let seconds = Math.floor((diff / 1000) % 60);
+
+      resetTimerEl.textContent = `⏳ Spins reset in: ${hours}h ${minutes}m ${seconds}s`;
+
+      if (diff <= 0) {
+        spinsLeft = MAX_SPINS;
+        storedData = { date: new Date().toLocaleDateString(), spins: spinsLeft };
+        localStorage.setItem("spinData", JSON.stringify(storedData));
+        updateSpinsDisplay();
+      }
+    }
+    setInterval(updateResetTimer, 1000);
+    updateResetTimer();
+
+    const slices = [
+      "🎁 10Coins","🧨 None","🎰 +5 Spin","🎡 30Coins",
+      "💎 5Coins","🏆 20Coins","💣 None","🔥 20Coins",
+      "✨ 15Coins","🎲 10Coins","🪙 35Coins","🍀 40Coins"
+    ];
+    const colors = ["#FF5733","#33FF57","#3357FF","#FF33A6",
+                    "#FFD433","#33FFF2","#9D33FF","#FF8C33",
+                    "#33FF8C","#8CFF33","#338CFF","#FF3333"];
+
+    let startAngle = 0;
+    let arc = (2 * Math.PI) / slices.length;
+    let spinTimeout = null;
+    let spinAngleStart = 0;
+    let spinTime = 0;
+    let spinTimeTotal = 0;
+
+    function drawWheel(highlightIndex = -1) {
+      const size = Math.min(canvas.width, canvas.height) / 2;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 2;
+      ctx.font = `${Math.floor(size/12)}px Arial`;
+
+      for (let i = 0; i < slices.length; i++) {
+        const angle = startAngle + i * arc;
+        ctx.fillStyle = colors[i];
+        ctx.beginPath();
+        ctx.moveTo(size, size);
+        ctx.arc(size, size, size-10, angle, angle + arc, false);
+        ctx.lineTo(size, size);
+        ctx.fill();
+        ctx.stroke();
+
+        if (i === highlightIndex) {
+          ctx.save();
+          ctx.shadowColor = "gold";
+          ctx.shadowBlur = 40;
+          ctx.beginPath();
+          ctx.moveTo(size, size);
+          ctx.arc(size, size, size-10, angle, angle + arc, false);
+          ctx.lineTo(size, size);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        ctx.save();
+        ctx.fillStyle = "white";
+        ctx.translate(size + Math.cos(angle + arc/2) * (size-40),
+                      size + Math.sin(angle + arc/2) * (size-40));
+        ctx.rotate(angle + arc/2);
+        ctx.fillText(slices[i], -ctx.measureText(slices[i]).width / 2, 0);
+        ctx.restore();
+      }
+
+      ctx.fillStyle = "gold";
+      ctx.beginPath();
+      ctx.moveTo(size-10, 10);
+      ctx.lineTo(size+10, 10);
+      ctx.lineTo(size, 40);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function rotateWheel() {
+      spinTime += 30;
+      if (spinTime >= spinTimeTotal) {
+        stopRotateWheel();
+        return;
+      }
+      const spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
+      startAngle += (spinAngle * Math.PI) / 180;
+      drawWheel();
+      spinTimeout = setTimeout(rotateWheel, 30);
+    }
+
+    function stopRotateWheel() {
+      clearTimeout(spinTimeout);
+      spinMusic.pause();
+      spinMusic.currentTime = 0;
+
+      const degrees = (startAngle * 180) / Math.PI + 90;
+      const arcd = (arc * 180) / Math.PI;
+      const index = Math.floor((360 - (degrees % 360)) / arcd);
+
+      drawWheel(index);
+
+      winSound.play();
+      confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 } });
+
+      resultBox.innerText = `🎉 You Won: ${slices[index]} 🎉`;
+      resultBox.style.display = "block";
+    }
+
+    function easeOut(t, b, c, d) {
+      const ts = (t /= d) * t;
+      const tc = ts * t;
+      return b + c * (tc + -3 * ts + 3 * t);
+    }
+
+    spinBtn.addEventListener("click", () => {
+      if (spinsLeft <= 0) {
+        alert("❌ You have used all 20 spins for today. Come back tomorrow!");
+        return;
+      }
+
+      spinsLeft--;
+      storedData.spins = spinsLeft;
+      localStorage.setItem("spinData", JSON.stringify(storedData));
+      updateSpinsDisplay();
+
+      spinAngleStart = Math.random() * 10 + 10;
+      spinTime = 0;
+      spinTimeTotal = Math.random() * 3000 + 4000;
+
+      resultBox.style.display = "none";
+      spinMusic.play();
+      rotateWheel();
+    });
+
+    drawWheel();
+  </script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAL_Rou6y71aUcrZQyf1DpApkgjYh9UV70",
+    authDomain: "mycoinapp-b5412.firebaseapp.com",
+    projectId: "mycoinapp-b5412",
+    storageBucket: "mycoinapp-b5412.firebasestorage.app",
+    messagingSenderId: "175876483349",
+    appId: "1:175876483349:web:17ff128708bba2667a611c",
+    measurementId: "G-F1DE89XP8N"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+</body
+</html>
+
+
+
+<h1>Novaspin Dashboard</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novaspin 🔥</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .btn {
+            background-color: gold;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+
+        .Coins-balance, .ref-balance {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+        nav {
+            background-color: gold;
+            padding: 10px;
+        }
+
+        nav a {
+            color: black;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            display: none;
+            padding: 20px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background: gold;
+            color: black;
+        }
+
+        input, textarea {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .invite-container {
+            margin-top: 15px;
+        }
+
+        #inviteLink {
+            background: #fff;
+            color: black;
+            padding: 5px;
+            border-radius: 5px;
+            display: inline-block;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body
+
+
+<div class="container">
+      <h1><p class="power">Roda da Fortuna 🇧🇷</p></h1>
+      
+      
+      
+      
+      
+      <div class="hash-box">
+  <div class="hash-title">⚡ Power Level</div>
+  <div class="hash-value">
+    <span id="power">125.50</span>
+    <span id="unit">LVL-2</span>
+  </div>
+
+  <div class="unit-buttons">
+    <button onclick="setUnit('LVL-1')" class="gold">LVL-1</button>
+    <button onclick="setUnit('LVL-2')" class="silver">LVL-2</button>
+    <button onclick="setUnit('LVL-3')" class="lemongreen">LVL-3</button>
+    <button onclick="setUnit('LVL-4')" class="red">LVL-4</button>
+  </div>
+</div>
+
+<style>
+.hash-box{
+  background: transparent;
+  padding:16px;
+  border-radius:14px;
+  text-align:center;
+  max-width:320px;
+  margin:auto;
+  box-shadow:0 0 25px rgba(0,255,204,.15);
+}
+
+.hash-title{
+  color:#006400;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.hash-value{
+  font-size:32px;
+  font-weight:bold;
+  color:#00ffcc;
+  text-shadow:0 0 15px rgba(0,255,204,.8);
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+  from{ text-shadow:0 0 10px rgba(0,255,204,.4); }
+  to{ text-shadow:0 0 22px rgba(0,255,204,1); }
+}
+
+.unit-buttons{
+  margin-top:12px;
+  display:flex;
+  justify-content:center;
+  gap:6px;
+}
+
+.unit-buttons button{
+  padding:6px 10px;
+  border:none;
+  border-radius:8px;
+  color:#000;
+  font-size:13px;
+  cursor:pointer;
+  font-weight:bold;
+  box-shadow:0 0 8px rgba(0,255,204,.25);
+}
+
+.unit-buttons button.gold{ background: gold; }
+.unit-buttons button.silver{ background: silver; }
+.unit-buttons button.lemongreen{ background: #dfff00; }
+.unit-buttons button.red{ background: #ff4d4d; }
+
+.unit-buttons button:hover{
+  filter: brightness(1.2);
+}
+</style>
+
+<script>
+/* =========================
+   POWER LEVEL ENGINE
+   ========================= */
+
+let powerLevel = parseFloat(localStorage.getItem("powerLevel")) || 125.5;
+let unit = localStorage.getItem("powerUnit") || "LVL-2";
+
+const powerEl = document.getElementById("power");
+const unitEl = document.getElementById("unit");
+
+function updateDisplay(){
+  powerEl.textContent = powerLevel.toFixed(2);
+  unitEl.textContent = unit;
+}
+
+function setUnit(newUnit){
+  unit = newUnit;
+  localStorage.setItem("powerUnit", unit);
+  updateDisplay();
+}
+
+// simulate activity
+setInterval(() => {
+  let fluctuation = (Math.random() * 0.8) - 0.4;
+  powerLevel += fluctuation;
+
+  if(powerLevel < 120) powerLevel = 120;
+  if(powerLevel > 150) powerLevel = 150;
+
+  localStorage.setItem("powerLevel", powerLevel);
+  updateDisplay();
+}, 1200);
+
+updateDisplay();
+</script>
+      
+      
+      
+      
+      
+      <p class="Coins-balance">
+  <h1>
+    Coins Balance:
+    <span id="balance">0.000000005</span>
+  </h1>
+</p>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+  .Coins-spin {
+    display:inline-block;
+    font-size:24px;
+    color:gold;
+Novaspin    animation: spin 4s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+</style>
+
+<i class="fab fa-game Coins-spin" aria-label="game Coins">🎯</i>
+
+<script>
+/* =========================
+   DECIMAL GENERATOR WITH LOCAL STORAGE
+   ========================= */
+
+// Load previous balance from localStorage, or start at 0.000000005
+let balance = parseFloat(localStorage.getItem("balance")) || 0.000000005;
+
+// Step value per tick
+const step = 0.000000005;
+
+// Display element
+const balanceEl = document.getElementById("balance");
+
+// Function to update the display and save to localStorage
+function updateBalance(){
+  balanceEl.textContent = balance.toFixed(9);
+  localStorage.setItem("balance", balance);
+}
+
+// Continuous Generator every 1 second
+setInterval(() => {
+  balance += step;
+  updateBalance();
+}, 1000);
+
+// Initial display
+updateBalance();
+</script>
+      
+      
+      
+     
+          <h1>In-App Features</h1>
+        
+         
+         
+         
+         <div
+  id="nova-info"
+  style="
+    font-size:12px;
+    color:#FFD700;
+    line-height:1.5;
+    padding:8px;
+    cursor:pointer;
+    transition:color 0.3s ease;
+  "
+>
+  Coins in this app are used only for in-app gameplay. They support interactive features. Future updates may allow coins to unlock optional upgrades such as higher power levels, level progression, and visual theme features☄️
+</div>
+
+<script>
+  (function () {
+    var colors = [
+      "#FFD700", // gold
+      "#1E90FF", // blue
+      "#800020", // wine
+      "#FFFFFF", // white
+      "#FF69B4", // pink
+      "#FFA500", // orange
+      "#B9F2FF", // diamond
+      "#C0C0C0"  // silver
+    ];
+
+    var el = document.getElementById("nova-info");
+    if (!el) return;
+
+    el.addEventListener("click", function () {
+      var randomColor = colors[Math.floor(Math.random() * colors.length)];
+      el.style.color = randomColor;
+    });
+  })();
+</script>
+         
+         
+         
+         
+         <!-- Daily Bonus Button -->
+<button id="daily-bonus-btn">Claim Daily Bonus</button>
+<div id="daily-bonus-message"></div>
+<div id="daily-bonus-countdown"></div>
+
+<script>
+(function() {
+  const DAILY_COINS = 500;
+  const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+  const claimBtn = document.getElementById("daily-bonus-btn");
+  const messageEl = document.getElementById("daily-bonus-message");
+  const countdownEl = document.getElementById("daily-bonus-countdown");
+  
+  // Track last claim using localStorage
+  let lastClaim = parseInt(localStorage.getItem("dailyBonusLastClaim")) || 0;
+
+  // Countdown update
+  function updateCountdown() {
+    const now = Date.now();
+    const nextClaim = lastClaim + ONE_DAY_MS;
+
+    if (now >= nextClaim) {
+      claimBtn.disabled = false;
+      countdownEl.innerHTML = `<span style="color: blue;">You can claim today's bonus!</span>`;
+    } else {
+      claimBtn.disabled = true;
+      let timeRemaining = nextClaim - now;
+      const hours = Math.floor(timeRemaining / (1000*60*60));
+      const minutes = Math.floor((timeRemaining % (1000*60*60)) / (1000*60));
+      const seconds = Math.floor((timeRemaining % (1000*60)) / 1000);
+      countdownEl.innerHTML = `<span style="color: blue;">Next claim in: </span>
+                               <span style="color: red;">${hours}h ${minutes}m ${seconds}s</span>`;
+      setTimeout(updateCountdown, 1000);
+    }
+  }
+
+  // Popup animation - FIXED position so always visible
+  function showPopup(text) {
+    const popup = document.createElement("div");
+    popup.style.position = "fixed";  // FIXED ensures it shows over everything
+    popup.style.left = "50%";
+    popup.style.top = "20%";
+    popup.style.transform = "translateX(-50%)";
+    popup.style.fontSize = "22px";
+    popup.style.fontWeight = "bold";
+    popup.style.color = "#ffcc00";
+    popup.style.background = "rgba(0,0,0,0.8)";
+    popup.style.padding = "10px 20px";
+    popup.style.borderRadius = "8px";
+    popup.style.opacity = "0";
+    popup.style.zIndex = 9999;
+    popup.style.pointerEvents = "none";
+    popup.innerText = text;
+    document.body.appendChild(popup);
+
+    // Animate fade-in + float up
+    let opacity = 0;
+    let position = 0;
+    const interval = setInterval(() => {
+      opacity += 0.05;
+      position -= 1; // move up
+      popup.style.opacity = Math.min(opacity, 1);
+      popup.style.transform = `translate(-50%, ${position}px)`;
+    }, 16);
+
+    // Remove after 1.2s
+    setTimeout(() => {
+      clearInterval(interval);
+      popup.remove();
+    }, 1200);
+  }
+
+  // Claim daily bonus
+  function claimDailyBonus() {
+    const now = Date.now();
+    const nextClaim = lastClaim + ONE_DAY_MS;
+
+    if (now < nextClaim) {
+      // Already claimed popup
+      showPopup("Your daily bonus has already been claimed!");
+      return;
+    }
+
+    // Allow claim
+    lastClaim = now;
+    localStorage.setItem("dailyBonusLastClaim", lastClaim);
+
+    showPopup(`+${DAILY_COINS} coins added!`);
+    messageEl.style.color = "green";
+    messageEl.innerText = "Daily bonus claimed! 🎉";
+    messageEl.style.opacity = 1;
+
+    claimBtn.disabled = true;
+    updateCountdown();
+    setTimeout(() => messageEl.style.opacity = 0, 2000);
+  }
+
+  claimBtn.addEventListener("click", claimDailyBonus);
+
+  // Start countdown immediately
+  updateCountdown();
+})();
+</script>
+
+<style>
+#daily-bonus-btn {
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  background: gold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#daily-bonus-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+#daily-bonus-message {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+#daily-bonus-countdown {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+</style>
+         
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reward Preview Calculator</title>
+
+<style>
+@keyframes colorPulse {
+  0% { color: #dfff00; }
+  50% { color: #c6e200; }
+  100% { color: #dfff00; }
+}
+
+.animated-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  animation: colorPulse 2s infinite ease-in-out;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+</style>
+
+<style>
+/* ===== SAFE CONTAINER ===== */
+.activity-wrapper {
+  max-width: 420px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== CARD ===== */
+.activity-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* ===== INPUT GROUP ===== */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* ===== COLORED INPUTS ===== */
+.Speedlevel label { color: #1e88e5; }
+.Speedlevel input { border: 2px solid #1e88e5; }
+
+.power label { color: #fb8c00; }
+.power input { border: 2px solid #fb8c00; }
+
+.electricity label { color: #2e7d32; }
+.electricity input { border: 2px solid #2e7d32; }
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+}
+
+/* ===== BUTTON ===== */
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f9a825, #f57c00);
+  color: #fff;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* ===== RESULT ===== */
+#result {
+  margin-top: 18px;
+  padding: 12px;
+  background: #fff8e1;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: #f9a825;
+}
+
+/* ===== LIVE SPEED ===== */
+.live-hash {
+  margin-top: 16px;
+  background: #e3f2fd;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  color: #1565c0;
+  font-weight: bold;
+}
+
+/* ===== DISCLAIMER ===== */
+.disclaimer {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #7f8c8d;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="activity-wrapper">
+  <div class="activity-card">
+
+    <h1 class="animated-title">Reward Preview Calculator</h1>
+
+    <div class="input-group Speedlevel">
+      <label>🚀 Speed Level</label>
+      <input type="number" id="speed" placeholder="Enter speed level">
+    </div>
+
+    <div class="input-group power">
+      <label>⚡ Activity Power</label>
+      <input type="number" id="power" placeholder="Enter power value">
+    </div>
+
+    <div class="input-group electricity">
+      <label>⚙️ System Cost</label>
+      <input type="number" id="systemCost" placeholder="Enter system cost">
+    </div>
+
+    <button onclick="calculateReward()">Calculate Reward</button>
+
+    <div id="result">Enter values to calculate</div>
+
+    <div class="live-hash" id="liveSpeed">
+      Live Speed: 0 pts
+    </div>
+
+    <div class="disclaimer">
+      This preview is for in-app activity estimation only.
+    </div>
+
+  </div>
+</div>
+
+<script>
+function calculateReward() {
+  const speed = parseFloat(document.getElementById("speed").value);
+  const power = parseFloat(document.getElementById("power").value);
+  const systemCost = parseFloat(document.getElementById("systemCost").value);
+  const result = document.getElementById("result");
+
+  if (isNaN(speed) || isNaN(power) || isNaN(systemCost)) {
+    result.style.color = "#c62828";
+    result.innerText = "Please fill all fields correctly";
+    return;
+  }
+
+  const rewardPerUnit = 0.00005;
+  const costFactor = (power / 1000) * systemCost;
+  const reward = (speed * rewardPerUnit) - costFactor;
+
+  result.style.color = "#f9a825";
+  result.innerText = "Estimated Reward: " + reward.toFixed(4) + " points / hour";
+}
+
+/* Live speed simulation (visual only) */
+setInterval(() => {
+  document.getElementById("liveSpeed").innerText =
+    "Live Speed: " + (Math.random() * 120 + 10).toFixed(2) + " pts";
+}, 1500);
+</script>
+
+</body>
+</html>
+
+
+
+
+<section id="home" class="active">
+    <div class="poll-container">
+        <h2>🪙 Coin Progress Poll</h2>
+        <p>Which strategy do you like most for boosting your progress?</p>
+
+        <div class="poll-options">
+            <label>
+                <input type="radio" name="poll" value="cloud">
+                Cloud Boost
+            </label>
+            <label>
+                <input type="radio" name="poll" value="hardware">
+                Hardware Boost
+            </label>
+            <label>
+                <input type="radio" name="poll" value="pool">
+                Pool Boost
+            </label>
+        </div>
+
+        <button onclick="submitVote()">Vote Now</button>
+
+        <div id="poll-results" class="poll-results" style="display:none;">
+            <h3>Live Results:</h3>
+            <div id="result-cloud">Cloud Boost: 0%</div>
+            <div id="result-hardware">Hardware Boost: 0%</div>
+            <div id="result-pool">Pool Boost: 0%</div>
+        </div>
+    </div>
+
+    <style>
+        .poll-container {
+            background: #111;
+            color: gold;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            font-family: Arial, sans-serif;
+        }
+        .poll-options label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        button {
+            background: gold;
+            color: #111;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: orange;
+        }
+        .poll-results {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        let votes = JSON.parse(localStorage.getItem("coinPollVotes")) || {
+            cloud: 0,
+            hardware: 0,
+            pool: 0
+        };
+
+        function submitVote() {
+            let choice = document.querySelector('input[name="poll"]:checked');
+            if (!choice) {
+                alert("Please select an option before voting!");
+                return;
+            }
+
+            let selected = choice.value;
+            votes[selected]++;
+
+            localStorage.setItem("coinPollVotes", JSON.stringify(votes));
+
+            showResults();
+        }
+
+        function showResults() {
+            let totalVotes = votes.cloud + votes.hardware + votes.pool;
+            if (totalVotes === 0) totalVotes = 1; // Avoid division by zero
+
+            document.getElementById("result-cloud").innerText = 
+                `Cloud Boost: ${((votes.cloud / totalVotes) * 100).toFixed(1)}%`;
+            document.getElementById("result-hardware").innerText = 
+                `Hardware Boost: ${((votes.hardware / totalVotes) * 100).toFixed(1)}%`;
+            document.getElementById("result-pool").innerText = 
+                `Pool Boost: ${((votes.pool / totalVotes) * 100).toFixed(1)}%`;
+
+            document.getElementById("poll-results").style.display = "block";
+        }
+
+        // Auto show results if already voted
+        if (votes.cloud + votes.hardware + votes.pool > 0) {
+            showResults();
+        }
+    </script>
+</section>
+
+    
+          
+          
+                
+        <h1>Welcome to Novaspin Progress 🔥</h1>
+      
+      
+      
+      <a href="#" class="cta-btn">PLAY OUR PROGRESS NOW
+      </a>
+    </div>
+  </section>
+        
+        
+     
+        
+        <!-- START: Premium Image Slider with Dynamic Dots -->
+<div id="mySlider" style="position: relative; width: 100%; height: 35vh; overflow: hidden; margin: 20px auto; border-radius:10px;">
+
+  <div class="slides" style="position: relative; width: 100%; height: 100%;">
+    <img src="https://picsum.photos/id/1015/800/400" alt="Image 1">
+    <img src="https://picsum.photos/id/1016/800/400" alt="Image 2">
+    <img src="https://picsum.photos/id/1018/800/400" alt="Image 3">
+    <img src="https://picsum.photos/id/1019/800/400" alt="Image 4">
+    <img src="https://picsum.photos/id/1020/800/400" alt="Image 5">
+    <img src="https://picsum.photos/id/1021/800/400" alt="Image 6">
+    <img src="https://picsum.photos/id/1022/800/400" alt="Image 7">
+    <img src="https://picsum.photos/id/1023/800/400" alt="Image 8">
+    <img src="https://picsum.photos/id/1024/800/400" alt="Image 9">
+    <img src="https://picsum.photos/id/1025/800/400" alt="Image 10">
+  </div>
+
+  <div class="dots" style="text-align:center; position:absolute; bottom:10px; width:100%;"></div>
+
+</div>
+
+<script>
+(function(){
+  const slider = document.getElementById('mySlider');
+  const slides = slider.querySelectorAll('.slides img');
+  const dotsContainer = slider.querySelector('.dots');
+
+  let current = 0;
+
+  // Initialize slides and dots
+  slides.forEach((img, i) => {
+    img.style.position = 'absolute';
+    img.style.top = '0';
+    img.style.left = '0';
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.transition = 'transform 1s ease, opacity 1s ease';
+    img.style.opacity = i===0 ? '1' : '0';
+
+    // Create dots
+    const dot = document.createElement('span');
+    dot.style.display = 'inline-block';
+    dot.style.height = '10px';
+    dot.style.width = '10px';
+    dot.style.margin = '0 4px';
+    dot.style.backgroundColor = 'darkblue'; // inactive dots
+    dot.style.borderRadius = '50%';
+    dot.style.transition = 'background-color 0.5s ease';
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = dotsContainer.querySelectorAll('span');
+
+  function showSlide(index){
+    slides.forEach((s, i) => {
+      s.style.opacity = i===index ? '1' : '0';
+      s.style.transform = 'translateX(0) translateY(0)';
+    });
+
+    // Update dot colors
+    dots.forEach((d, i) => {
+      if(i < index) d.style.backgroundColor = 'blue';      // passed
+      else if(i === index) d.style.backgroundColor = 'gold'; // current
+      else d.style.backgroundColor = 'darkblue';           // upcoming
+    });
+
+    current = index;
+  }
+
+  function nextSlide(){
+    const prev = current;
+    current = (current + 1) % slides.length;
+
+    const directions = ['left','right','top','bottom'];
+    const direction = directions[Math.floor(Math.random()*directions.length)];
+    
+    const nextImg = slides[current];
+
+    switch(direction){
+      case 'left': nextImg.style.transform = 'translateX(-100%)'; break;
+      case 'right': nextImg.style.transform = 'translateX(100%)'; break;
+      case 'top': nextImg.style.transform = 'translateY(-100%)'; break;
+      case 'bottom': nextImg.style.transform = 'translateY(100%)'; break;
+    }
+
+    // Force reflow
+    void nextImg.offsetWidth;
+    showSlide(current);
+  }
+
+  setInterval(nextSlide, 4000); // change slide every 4s
+})();
+</script>
+<!-- END: Premium Image Slider with Dynamic Dots -->
+        
+
+    
+
+
+
+<!-- Spin Wheel Safe Block START -->
+<div id="spin-wheel-root">
+  <style>
+    #spin-wheel-root {
+      background-color: transparent; /* ✅ CHANGED */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 16px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #spin-wheel-root .content-box {
+      text-align: center;
+      max-width: 460px;
+      padding: 24px;
+    }
+
+    #spin-wheel-root .icon-box {
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle at top, #ff9800, #ff5722);
+      border-radius: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 18px auto;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+    }
+
+    #spin-wheel-root .icon-box span {
+      font-size: 38px;
+      color: #ffffff;
+    }
+
+    #spin-wheel-root h1 {
+      color: #ff5722;
+      font-size: 32px;
+      margin-bottom: 16px;
+      font-weight: bold;
+    }
+
+    #spin-wheel-root .main-text {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #4caf50;
+    }
+  </style>
+
+  <div class="content-box">
+    <div class="icon-box">
+      <span>🎡</span>
+    </div>
+
+    <h1>Spin Wheel</h1>
+
+    <div class="main-text">
+      🎯 Spin the wheel daily to enjoy a fun and interactive experience.<br>
+      ⭐ Collect in-app coins through fair and random spins designed for entertainment.<br>
+      🎁 Coins are used only within the app to unlock features, themes, and customization options.<br>
+      📘 This app is created strictly for entertainment purposes and does not involve real money or gambling.
+    </div>
+  </div>
+</div>
+<!-- Spin Wheel Safe Block END -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GameSpot Daily Rewards</title>
+<style>
+/* GENERAL RESET */
+#dbs-container, #dbs-container * { box-sizing: border-box; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial; }
+
+/* CONTAINER */
+#dbs-container {
+  max-width:980px;
+  margin:14px auto;
+  padding:18px;
+  border-radius:18px;
+  position:relative;
+  z-index:50;
+  overflow:visible;
+  background: linear-gradient(180deg, rgba(17,13,6,0.65), rgba(30,22,8,0.7));
+  border: 3px solid rgba(255,215,0,0.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+#dbs-container::before {
+  content:"";
+  pointer-events:none;
+  position:absolute; inset:-6px;
+  border-radius:22px;
+  padding:3px;
+  background: linear-gradient(90deg, rgba(0,122,255,0.85), rgba(255,255,255,0.9), rgba(255,215,0,0.9), rgba(75,0,130,0.9), rgba(255,255,0,0.9), rgba(0,255,128,0.9));
+  background-size: 300% 300%;
+  animation: dbs-edge 8s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+@keyframes dbs-edge { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+
+/* HEADER */
+#dbs-header { display:flex; align-items:center; gap:12px; margin-bottom:12px; color:#fff; }
+#dbs-header .dbs-logo { width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#ffd86b,#ffb86b); display:flex;align-items:center;justify-content:center;font-weight:800;color:#2b1a00;font-size:20px; box-shadow:0 8px 20px rgba(255,184,77,0.12);}
+#dbs-header h2 { font-size:20px; margin:0; font-weight:700; color:#fff; }
+#dbs-header p { margin:0;font-size:12px;color: #e6dca8; opacity:0.95; }
+#dbs-header span#dbs-balance { margin-left:auto; font-weight:700; color:#e6dca8; }
+
+/* GRID CARDS */
+#dbs-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap:14px; position:relative; z-index:10; }
+.dbs-card { background: linear-gradient(180deg, rgba(255,248,230,0.03), rgba(0,0,0,0.25)); border-radius:14px; padding:14px; text-align:center; color:#fff; position:relative; overflow:hidden; border:1px solid rgba(255,215,0,0.06); min-height:150px; }
+.dbs-card .day { font-size:18px; font-weight:800; color:#fff; margin-bottom:6px; }
+.dbs-card .reward { font-size:15px; color: #fff; opacity:0.95; margin-bottom:8px; }
+.dbs-card .icon { font-size:28px; display:block; margin-bottom:12px; transform-origin:center; }
+
+/* BUTTONS */
+.dbs-claim { display:inline-block; width:100%; padding:10px 8px; border-radius:10px; font-weight:800; cursor:pointer; border:none; background: linear-gradient(90deg,#ffd86b,#ffb86b); color:#1b1200; transition:transform .12s ease, box-shadow .12s ease; box-shadow:0 8px 18px rgba(255,184,77,0.12); }
+.dbs-claim:active { transform:scale(.98); }
+.dbs-locked { background:#3b3b3b !important; color:#bdbdbd !important; cursor:default; box-shadow:none; opacity:0.95; }
+
+/* SMALL TEXT */
+.dbs-small { font-size:12px; color:#e6dca8; opacity:0.9; margin-top:8px; }
+.dbs-timer { font-size:13px; color:#fff; background: rgba(255,255,255,0.04); padding:6px 8px; border-radius:8px; display:inline-block; margin-top:8px; }
+
+/* HISTORY */
+#dbs-history { margin-top:14px; background:rgba(255,255,255,0.02); padding:10px; border-radius:10px; color:#fff; font-size:13px; max-height:160px; overflow:auto; border:1px solid rgba(255,215,0,0.04); }
+
+/* POPUP */
+.dbs-popup { position:fixed; right:18px; bottom:18px; z-index:99999; padding:10px 14px; border-radius:10px; background: linear-gradient(90deg,#ffd86b,#ffeaa7); color:#2b1200; font-weight:800; box-shadow:0 12px 30px rgba(0,0,0,0.35); transform-origin: right bottom; animation: dbs-popup-in .5s ease; }
+@keyframes dbs-popup-in { from{ transform:translateY(8px) scale(.96); opacity:0 } to{ transform:none; opacity:1 } }
+
+/* EXPLOSION COINS */
+#dbs-explosion { position:fixed; left:0; top:0; width:100%; height:100%; pointer-events:none; z-index:99998; }
+.dbs-coin-spin { width:36px; height:36px; margin:0 auto 8px; display:block; }
+
+/* RESPONSIVE */
+@media (max-width:520px){
+#dbs-header { gap:8px } 
+#dbs-header h2{font-size:16px} 
+.dbs-card{min-height:130px;padding:12px} 
+.dbs-claim{padding:8px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<div id="dbs-container">
+  <div id="dbs-bg" aria-hidden="true"></div>
+  <div id="dbs-top" style="position:relative; z-index:10;">
+    <div id="dbs-header">
+      <div class="dbs-logo">GS</div>
+      <div>
+          
+   
+          
+        <h2>GameSpot Rewards</h2>
+        <p>Claim a new reward every 24 hours. Miss a day and you restart from Day 1</p>
+      </div>
+      <span id="dbs-balance"></span>
+    </div>
+    <div id="dbs-grid" role="list"></div>
+    <div id="dbs-history" aria-live="polite">
+      <strong>Reward History</strong>
+      <div id="dbs-history-list" style="margin-top:8px"></div>
+    </div>
+  </div>
+  <div id="dbs-explosion" aria-hidden="true"></div>
+  <audio id="dbs-audio" preload="auto">
+    <source src="dbs-claim.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+(function(){
+  // ========== CONFIG ==========
+  const REWARDS = [
+    {day:1,amount:100,icon:'🪙'},
+    {day:2,amount:150,icon:'💎'},
+    {day:3,amount:200,icon:'🎮'},
+    {day:4,amount:250,icon:'✨'},
+    {day:5,amount:300,icon:'🛡️'},
+    {day:6,amount:350,icon:'⚔️'},
+    {day:7,amount:400,icon:'🏆'},
+    {day:8,amount:800,icon:'🎯',mult:2}
+  ];
+
+  const LS_KEYS = { day:'dbs_day_v2', last:'dbs_last_v2', bal:'dbs_bal_v2', history:'dbs_hist_v2' };
+  const RESET_AFTER_HOURS = 48; // reset after 48h inactivity
+  const WAIT_HOURS = 24; // must wait 24h between claims
+
+  const el = id => document.getElementById(id);
+  const now = ()=> Date.now();
+
+  // ========== STORAGE ==========
+  function loadState(){
+    const day = parseInt(localStorage.getItem(LS_KEYS.day) || '1',10);
+    const last = parseInt(localStorage.getItem(LS_KEYS.last) || '0',10);
+    const bal = Number(localStorage.getItem(LS_KEYS.bal) || '0');
+    const hist = JSON.parse(localStorage.getItem(LS_KEYS.history) || '[]');
+    return { day, last, bal, hist };
+  }
+  function saveState(state){
+    localStorage.setItem(LS_KEYS.day, state.day);
+    localStorage.setItem(LS_KEYS.last, state.last);
+    localStorage.setItem(LS_KEYS.bal, state.bal);
+    localStorage.setItem(LS_KEYS.history, JSON.stringify(state.hist));
+  }
+
+  let state = loadState();
+
+  // reset if last claim too old
+  function checkReset() {
+    if (!state.last) return;
+    const hours = (now() - state.last) / (1000*60*60);
+    if (hours > RESET_AFTER_HOURS) {
+      state.day = 1; state.last = 0; saveState(state);
+    }
+  }
+  checkReset();
+
+  // ========== UI BUILD ==========
+  const grid = el('dbs-grid');
+  function buildGrid(){
+    grid.innerHTML = '';
+    for (let i=0;i<REWARDS.length;i++){
+      const r = REWARDS[i];
+      const card = document.createElement('div');
+      card.className = 'dbs-card';
+      card.setAttribute('data-day', r.day);
+      card.innerHTML = `
+        <div class="day">${r.day === state.day ? 'Today' : 'Day ' + r.day}</div>
+        <div class="reward">${r.amount} Coins ${r.icon}</div>
+        <div class="icon" id="dbs-icon-${r.day}">${r.icon}</div>
+        <button id="dbs-btn-${r.day}" class="dbs-claim">Claim</button>
+        <div class="dbs-small" id="dbs-small-${r.day}"></div>
+      `;
+      grid.appendChild(card);
+    }
+    refreshUI();
+  }
+
+  // ========== UI REFRESH ==========
+  function refreshUI(){
+    el('dbs-balance').innerText = state.bal + ' Coins';
+    for (let i=0;i<REWARDS.length;i++){
+      const r = REWARDS[i];
+      const btn = el('dbs-btn-'+r.day);
+      const small = el('dbs-small-'+r.day);
+      btn.onclick = null;
+      btn.classList.remove('dbs-locked');
+      btn.disabled = false;
+
+      btn.classList.add('dbs-locked');
+      btn.innerText = 'Locked 🔒';
+      small.innerText = '';
+
+      if (r.day === state.day){
+        if (!state.last){
+          btn.classList.remove('dbs-locked'); btn.innerText='Claim'; btn.onclick = ()=>tryClaim(r.day);
+          small.innerText = 'Available now';
+        } else {
+          const hours = (now() - state.last)/(1000*60*60);
+          if (hours < WAIT_HOURS){
+            btn.classList.add('dbs-locked'); btn.innerText = 'Locked 🔒';
+            const remaining = WAIT_HOURS - hours;
+            small.innerText = `Wait ${formatTime(Math.ceil(remaining*3600))} to claim next day`;
+          } else if (hours >= WAIT_HOURS && hours <= RESET_AFTER_HOURS){
+            btn.classList.remove('dbs-locked'); btn.innerText='Claim'; btn.onclick = ()=>tryClaim(r.day);
+            small.innerText = 'Available now';
+          } else {
+            small.innerText = 'Missed a day — restart from Day 1';
+          }
+        }
+      } else {
+        btn.classList.add('dbs-locked');
+        btn.innerText = 'Locked 🔒';
+        if (r.day < state.day || (state.day===1 && state.last && (now()-state.last)<WAIT_HOURS && r.day===1)){
+          const claimed = state.hist && state.hist.find(h=>h.day===r.day);
+          if (claimed){
+            btn.classList.add('dbs-locked'); btn.innerText='Claimed';
+            small.innerText = `Claimed: ${new Date(claimed.ts).toLocaleString()}`;
+          }
+        }
+      }
+    }
+    updateHistoryUI();
+  }
+
+  function formatTime(seconds){
+    const h = Math.floor(seconds/3600);
+    const m = Math.floor((seconds%3600)/60);
+    const s = seconds%60;
+    if (h>0) return `${h}h ${m}m`;
+    if (m>0) return `${m}m ${s}s`;
+    return `${s}s`;
+  }
+
+  // ========== CLAIM FLOW ==========
+  function tryClaim(day){
+    if (day !== state.day) { smallNotice('This day is not available'); return; }
+    if (state.last){
+      const hours = (now()-state.last)/(1000*60*60);
+      if (hours < WAIT_HOURS){
+        smallNotice(`Please wait ${formatTime(Math.ceil((WAIT_HOURS - hours)*3600))}`);
+        refreshUI(); return;
+      }
+      if (hours > RESET_AFTER_HOURS){
+        state.day=1; state.last=0; saveState(state); buildGrid();
+        smallNotice('You missed a day — reset to Day 1'); return;
+      }
+    }
+    performClaim(day);
+  }
+
+  function performClaim(day){
+    const r = REWARDS.find(x=>x.day===day);
+    if (!r) return;
+    let amount = r.amount;
+    if (r.mult) amount *= r.mult;
+
+    state.bal += amount;
+    state.hist = state.hist || [];
+    state.hist.unshift({ day, amount, ts: now() });
+    state.last = now();
+    state.day = (state.day>=8)? 1 : state.day+1;
+    saveState(state);
+
+    showSmallPopup(`+${amount} Coins ${r.icon}`);
+    playSound();
+    explodeCoins();
+    refreshUI();
+  }
+
+  function smallNotice(msg){
+    const p = document.createElement('div');
+    p.className='dbs-popup';
+    p.innerText=msg;
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),3500);
+  }
+
+  function updateHistoryUI(){
+    const list = el('dbs-history-list');
+    list.innerHTML='';
+    if (!state.hist || !state.hist.length) { list.innerHTML='<div style="opacity:0.7">No claims yet</div>'; return; }
+    state.hist.slice(0,40).forEach(h=>{
+      const row = document.createElement('div');
+      row.style.padding='6px 8px';
+      row.style.borderBottom='1px dashed rgba(255,255,255,0.03)';
+      row.style.display='flex';
+      row.style.justifyContent='space-between';
+      row.style.alignItems='center';
+      row.innerHTML = `<div style="font-weight:700">Day ${h.day} — +${h.amount} Coins</div><div style="opacity:0.9;font-size:12px">${new Date(h.ts).toLocaleString()}</div>`;
+      list.appendChild(row);
+    });
+  }
+
+  function playSound(){
+    try{
+      const a = el('dbs-audio'); if(a){ a.currentTime=0; a.play().catch(()=>{}); }
+    }catch(e){}
+  }
+
+  // ========== CONFETTI & GAMESPOT COINS ==========
+  function explodeCoins(){
+    const container = el('dbs-explosion');
+    if (!container) return;
+    const colors = ['#ffd86b','#ffb86b','#00d4ff','#9b59b6','#8ee26b','#ffffff'];
+    for (let i=0;i<28;i++){
+      const c = document.createElement('div');
+      c.style.position='absolute';
+      c.style.left = (50 + (Math.random()-0.5)*40)+'%';
+      c.style.top = (40 + Math.random()*10)+'%';
+      c.style.width=(6+Math.random()*8)+'px';
+      c.style.height=(10+Math.random()*10)+'px';
+      c.style.background=colors[Math.floor(Math.random()*colors.length)];
+      c.style.opacity=0.95;
+      c.style.transform=`rotate(${Math.random()*360}deg)`;
+      c.style.borderRadius='2px';
+      c.style.zIndex=99999;
+      container.appendChild(c);
+      const dx=(Math.random()-0.5)*800;
+      const dy=- (200 + Math.random()*800);
+      c.animate([{ transform:'translateY(0) rotate(0deg)', opacity:1 },{ transform:`translateY(${dy}px) translateX(${dx}px) rotate(${720+Math.random()*720}deg)`, opacity:0 }], { duration:1400+Math.random()*600, easing:'cubic-bezier(.2,.8,.3,1)' });
+      setTimeout(()=>c.remove(),1800);
+    }
+  }
+
+  // ========== BACKGROUND GAMECOINS ==========
+  function startPointRain(){
+    const bg = el('dbs-bg');
+    if (!bg) return;
+    const COUNT = 14;
+    for(let i=0;i<COUNT;i++){
+      const s=document.createElement('div');
+      s.className='dbs-coin';
+      s.style.left=(Math.random()*100)+'%';
+      s.style.top=(-Math.random()*40)+'%';
+      s.style.opacity=0.08+Math.random()*0.14;
+      s.innerHTML=`<svg viewBox="0 0 48 48" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="22" fill="#ffd86b"/><text x="50%" y="57%" text-anchor="middle" font-size="18" font-weight="800" fill="#2b1500">GS</text></svg>`;
+      bg.appendChild(s);
+      (function(elm,delay){
+        setTimeout(function animate(){
+          const duration=6000+Math.random()*8000;
+          elm.animate([{transform:'translateY(0) rotate(0deg)'},{transform:`translateY(${110+Math.random()*120}vh) rotate(${360+Math.random()*720}deg)`}],{duration,duration,iterations:1,easing:'linear'});
+          setTimeout(()=>{ elm.style.left=(Math.random()*100)+'%'; elm.style.top=(-20+Math.random()*-60)+'%'; setTimeout(animate,200+Math.random()*1200);},duration);
+        },delay);
+      })(s,Math.random()*1200);
+    }
+  }
+
+  function showSmallPopup(text){
+    const p = document.createElement('div');
+    p.className='dbs-popup';
+    p.style.right='18px'; p.style.bottom='18px'; p.style.padding='8px 12px'; p.style.fontSize='14px';
+    p.innerText=text;
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),2800);
+  }
+
+  function init(){
+    buildGrid();
+    startpointRain();
+    refreshUI();
+    setInterval(()=>{
+      for (let i=0;i<REWARDS.length;i++){
+        const r=REWARDS[i];
+        const small = el('dbs-small-'+r.day);
+        if(!small) continue;
+        if(r.day===state.day && state.last){
+          const hours=(now()-state.last)/(1000*60*60);
+          if(hours<WAIT_HOURS){
+            const remainingS=Math.ceil((WAIT_HOURS-hours)*3600);
+            small.innerText='Wait '+formatTime(remainingS)+' to claim next day';
+          } else if(hours>=WAIT_HOURS && hours<=RESET_AFTER_HOURS){
+            small.innerText='Available now';
+            const btn=el('dbs-btn-'+r.day);
+            if(btn){ btn.classList.remove('dbs-locked'); btn.innerText='Claim'; btn.onclick=()=>tryClaim(r.day); }
+          } else if(hours>RESET_AFTER_HOURS){
+            state.day=1; state.last=0; saveState(state); buildGrid();
+          }
+        }
+      }
+    },1000);
+  }
+
+  window.DBS = { getState: ()=>state, forceReset: ()=>{ state.day=1; state.last=0; state.hist=[]; state.bal=0; saveState(state); buildGrid(); } };
+  init();
+})();
+</script>
+</body>
+</html>
+
+
+
+
+
+<!-- Novaspin Section — Fully game-style with sparkles -->
+<div id="novaspin-section" aria-live="polite">
+  <style>
+    /* =================== Scoped styles =================== */
+    #novaspin-section {
+      --bg:#04050a; --card:#071126; --glass: rgba(255,255,255,0.02);
+      --neon1:#00C2FF; --neon2:#FFD42A; --neon3:#39FF14; --neon4:#FF3B3B;
+      font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif; color:#eaf3ff;
+      box-sizing: border-box; padding:12px;
+    }
+
+    .ns-wrap {
+      background: linear-gradient(180deg, rgba(4,6,18,0.98), rgba(8,10,22,0.98));
+      border-radius:14px; padding:14px; position:relative; overflow:hidden;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .edge-grad {
+      position:absolute; inset:-12% -12% -12% -12%; pointer-events:none; z-index:0;
+      background: linear-gradient(90deg, rgba(255,66,66,0.04), rgba(0,194,255,0.04), rgba(57,255,20,0.03), rgba(255,196,24,0.03));
+      filter: blur(28px); transform: rotate(-6deg); animation: edgeShift 9s infinite linear; mix-blend-mode:screen;
+    }
+    @keyframes edgeShift {0%{transform:rotate(-6deg)}50%{transform:rotate(2deg)}100%{transform:rotate(-6deg)}}
+
+    .ns-header { display:flex; gap:12px; align-items:center; z-index:2; position:relative; }
+    .ns-logo {
+      width:56px; height:56px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg,var(--neon2),var(--neon1)); color:#021; font-weight:900; font-size:20px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+      flex: 0 0 56px;
+    }
+    .ns-title { margin:0; font-size:18px; color:#fff; line-height:1.02; }
+    .ns-sub { margin-top:4px; color:#cfe9ff; font-size:13px; opacity:0.95; }
+
+    .ns-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-top:14px; z-index:2; position:relative; }
+
+    .ns-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px; padding:12px; border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 26px rgba(2,6,23,0.6); backdrop-filter: blur(6px);
+      transition: transform .28s ease, box-shadow .28s ease;
+      cursor:pointer; position:relative; overflow:visible;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .ns-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.7); }
+
+    .card-head { display:flex; align-items:center; gap:10px; }
+    .card-icon {
+      width:48px; height:48px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+      font-size:20px; font-weight:800; color:#021; box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+      flex-shrink:0;
+      position:relative;
+      overflow:hidden;
+    }
+    .shake-small { animation: shakeSmall 3.6s ease-in-out infinite; transform-origin:center; }
+    @keyframes shakeSmall { 0%{transform:translateX(0) rotate(0deg);}25%{transform:translateX(-1px) rotate(-0.5deg);}50%{transform:translateX(1px) rotate(0.5deg);}75%{transform:translateX(-0.5px) rotate(-0.25deg);}100%{transform:translateX(0) rotate(0deg);} }
+
+    /* Sparkle effect inside icons */
+    .card-icon::after {
+      content:'';
+      position:absolute;
+      top:0; left:0; width:100%; height:100%;
+      background:radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%);
+      opacity:0; pointer-events:none; border-radius:10px;
+      animation: sparkle 1.2s infinite;
+    }
+    @keyframes sparkle {
+      0%,100% { opacity:0; transform: scale(0.6) rotate(0deg);}
+      50% { opacity:1; transform: scale(1.2) rotate(45deg);}
+    }
+
+    .card-title { margin:0; font-size:15px; color:#fff; transition: color 0.3s ease, text-shadow 0.3s ease; }
+    @keyframes glowGold { 0%,100%{ text-shadow:0 0 4px #FFD42A,0 0 8px #FFD42A; }50%{ text-shadow:0 0 10px #FFD42A,0 0 20px #FFD42A; } }
+    @keyframes glowBlue { 0%,100%{ text-shadow:0 0 4px #00C2FF,0 0 8px #00C2FF; }50%{ text-shadow:0 0 10px #00C2FF,0 0 20px #00C2FF; } }
+    @keyframes glowRed { 0%,100%{ text-shadow:0 0 4px #FF3B3B,0 0 8px #FF3B3B; }50%{ text-shadow:0 0 10px #FF3B3B,0 0 20px #FF3B3B; } }
+    @keyframes glowGreen { 0%,100%{ text-shadow:0 0 4px #39FF14,0 0 8px #39FF14; }50%{ text-shadow:0 0 10px #39FF14,0 0 20px #39FF14; } }
+
+    .ns-card.ic-spin:hover .card-title, .ns-card.ic-spin.open .card-title { animation: glowGold 1.2s infinite alternate; color:#FFD42A; }
+    .ns-card.ic-reward:hover .card-title, .ns-card.ic-reward.open .card-title { animation: glowBlue 1.2s infinite alternate; color:#00C2FF; }
+    .ns-card.ic-bonus:hover .card-title, .ns-card.ic-bonus.open .card-title { animation: glowRed 1.2s infinite alternate; color:#FF3B3B; }
+    .ns-card.ic-level:hover .card-title, .ns-card.ic-level.open .card-title { animation: glowGreen 1.2s infinite alternate; color:#39FF14; }
+    .ns-card.ic-trophy:hover .card-title, .ns-card.ic-trophy.open .card-title { animation: glowGold 1.2s infinite alternate; color:#FFD42A; }
+    .ns-card.ic-mystery:hover .card-title, .ns-card.ic-mystery.open .card-title { animation: glowBlue 1.2s infinite alternate; color:#00C2FF; }
+
+    .card-body { max-height:0; overflow:hidden; transition: max-height .45s cubic-bezier(.25,.9,.25,1), opacity .25s ease; opacity:0; }
+    .ns-card.open .card-body { opacity:1; max-height:1600px; }
+    .card-content { color:#dbeeff; font-size:14px; line-height:1.7; margin-top:8px; }
+
+    .caret { margin-left:auto; font-size:18px; color:#cfe9ff; transition: transform .28s ease; }
+
+    .btn { display:inline-block; margin-top:12px; padding:8px 12px; border-radius:10px; font-weight:700; text-decoration:none; font-size:13px; }
+    .btn.primary { background: linear-gradient(90deg,var(--neon1),var(--neon3)); color:#021; }
+    .btn.ghost { border:1px solid rgba(255,255,255,0.06); color:#dbeeff; background:transparent; }
+
+    .ns-footer { margin-top:12px; display:flex; justify-content:space-between; align-items:center; gap:8px; color:#9fb7d9; font-size:13px; z-index:2; position:relative; }
+
+    @media (max-width:420px){
+      .ns-header { gap:10px; }
+      .ns-logo { width:50px; height:50px; font-size:18px; }
+      .card-head { gap:8px; }
+      .card-icon { width:44px; height:44px; }
+      .card-title { font-size:15px; }
+      .card-content { font-size:14px; }
+    }
+  </style>
+
+  <div class="ns-wrap" role="region" aria-label="Novaspin Digital Game Module">
+    <div class="edge-grad" aria-hidden="true"></div>
+
+    <div class="ns-header" role="banner">
+      <div class="ns-logo" aria-hidden="true">NS</div>
+      <div style="flex:1;">
+        <h2 class="ns-title">Novaspin — Level-Up Fun</h2>
+        <div class="ns-sub">Tap a card to expand — fun rewards & achievements!</div>
+      </div>
+    </div>
+
+    <div class="ns-grid">
+      <article class="ns-card ic-spin" role="button" tabindex="0">
+        <div class="card-head">
+          <div class="card-icon shake-small" aria-hidden="true">🎰</div>
+          <div style="min-width:0;">
+            <h3 class="card-title">Spin Rewards</h3>
+            <div class="card-meta">Try your luck & collect points</div>
+          </div>
+          <div class="caret">▾</div>
+        </div>
+        <div class="card-body">
+          <div class="card-content">Earn points by spinning, completing fun challenges, and leveling up your score!</div>
+        </div>
+      </article>
+
+      <article class="ns-card ic-reward" role="button" tabindex="0">
+        <div class="card-head">
+          <div class="card-icon shake-small" aria-hidden="true">🏆</div>
+          <div>
+            <h3 class="card-title">Daily Bonus</h3>
+            <div class="card-meta">Check-in & claim rewards</div>
+          </div>
+          <div class="caret">▾</div>
+        </div>
+        <div class="card-body">
+          <div class="card-content">Claim bonus points daily to increase your score and unlock fun achievements.</div>
+        </div>
+      </article>
+
+      <article class="ns-card ic-bonus" role="button" tabindex="0">
+        <div class="card-head">
+          <div class="card-icon shake-small" aria-hidden="true">💎</div>
+          <div>
+            <h3 class="card-title">Mystery Box</h3>
+            <div class="card-meta">Surprise points & prizes</div>
+          </div>
+          <div class="caret">▾</div>
+        </div>
+        <div class="card-body">
+          <div class="card-content">Open boxes to get random rewards and increase your score!</div>
+        </div>
+      </article>
+
+      <article class="ns-card ic-level" role="button" tabindex="0">
+        <div class="card-head">
+          <div class="card-icon shake-small" aria-hidden="true">🎯</div>
+          <div>
+            <h3 class="card-title">Level-Up</h3>
+            <div class="card-meta">Advance your game skills</div>
+          </div>
+          <div class="caret">▾</div>
+        </div>
+        <div class="card-body">
+          <div class="card-content">Earn XP and level up. Unlock mini-games and fun challenges!</div>
+        </div>
+      </article>
+
+      <article class="ns-card ic-trophy" role="button" tabindex="0">
+        <div class="card-head">
+          <div class="card-icon shake-small" aria-hidden="true">🏅</div>
+          <div>
+            <h3 class="card-title">Achievements</h3>
+            <div class="card-meta">Collect trophies & badges</div>
+          </div>
+          <div class="caret">▾</div>
+        </div>
+        <div class="card-body">
+          <div class="card-content">Complete challenges and earn trophies. Show your progress and skills!</div>
+        </div>
+      </article>
+
+      <article class="ns-card ic-mystery" role="button" tabindex="0">
+        <div class="card-head">
+          <div class="card-icon shake-small" aria-hidden="true">🎁</div>
+          <div>
+            <h3 class="card-title">Secret Quests</h3>
+            <div class="card-meta">Hidden missions & bonus rewards</div>
+          </div>
+          <div class="caret">▾</div>
+        </div>
+        <div class="card-body">
+          <div class="card-content">Explore hidden missions and collect secret rewards to boost your score!</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="ns-footer">
+      <div>Novaspin • Fun & Game Mode</div>
+      <div>Tap a card to open • Mobile-ready</div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.getElementById('novaspin-section');
+      if(!root) return;
+      const cards = root.querySelectorAll('.ns-card');
+
+      function toggleCard(card){
+        const isOpen = card.classList.contains('open');
+        if(isOpen){
+          card.classList.remove('open');
+          card.setAttribute('aria-expanded','false');
+        } else {
+          card.classList.add('open');
+          card.setAttribute('aria-expanded','true');
+          setTimeout(()=>{ card.scrollIntoView({behavior:'smooth', block:'center'}); }, 260);
+        }
+      }
+
+      cards.forEach(card=>{
+        card.addEventListener('click', e=>{
+          if(e.target.closest('a') || e.target.tagName==='A') return;
+          toggleCard(card);
+        });
+        card.addEventListener('keydown', ev=>{
+          if(ev.key==='Enter'||ev.key===' '){ ev.preventDefault(); toggleCard(card); }
+        });
+        card.setAttribute('aria-expanded','false');
+      });
+    })();
+  </script>
+</div>
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Virtual Board (PROGRESS)</title>
+
+<style>
+    body{
+        background:#0e0e0e;
+        color:white;
+        font-family:Arial;
+        margin:0;
+        padding:15px;
+    }
+
+    h2{
+        margin-bottom:20px;
+        font-size:22px;
+        letter-spacing:0.5px;
+    }
+
+    .coin-box{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:12px 5px;
+        border-bottom:1px solid #1c1c1c;
+        transition:0.2s;
+    }
+
+    .coin-box:hover{
+        background:#151515;
+    }
+
+    .left{
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
+
+    .left img{
+        width:30px;
+        height:30px;
+        border-radius:50%;
+        background:#111;
+    }
+
+    .symbol{
+        font-size:16px;
+        font-weight:bold;
+    }
+
+    .name{
+        font-size:13px;
+        color:#bbb;
+    }
+
+    .score{
+        font-size:16px;
+        font-weight:bold;
+    }
+
+    .trend{
+        font-size:13px;
+        text-align:right;
+    }
+
+    .green{color:#0fdb75;}
+    .red{color:#ff4d4d;}
+
+    .disclaimer{
+        margin-top:15px;
+        font-size:12px;
+        color:#7f8c8d;
+        text-align:center;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>Virtual Board (PROGRESS)</h2>
+
+<div id="coins"></div>
+
+<div class="disclaimer">
+⚠️ All items are virtual and have no real-world value.
+</div>
+
+<script>
+// ---- Virtual game assets ----
+const list = [
+  ["NT","Nova Token"],["FC","Flux Core"],["PU","Pulse Unit"],
+  ["EC","Energy Cell"],["GC","Glow Crystal"],["OC","Orb Core"],
+  ["SP","Spark Point"],["VX","Vortex Chip"],["AX","Axiom Shard"],
+  ["NX","Nexus Gem"],["QT","Quantum Bit"],["PC","Power Cell"],
+  ["LC","Lumina Core"],["TS","Turbo Shard"],["MC","Matrix Coin"],
+  ["FS","Fusion Stone"],["HC","Hyper Chip"],["IC","Ion Crystal"],
+  ["RC","Radiant Core"],["SC","Solar Chip"],
+  ["VC","Volt Capsule"],["BC","Blade Core"],
+  ["KC","Kinetic Unit"],["CC","Cryo Cell"],
+  ["XC","Xeno Shard"],["UC","Ultra Core"],
+  ["DC","Dynamic Chip"],["ZC","Zenith Core"],
+  ["EC2","Echo Unit"],["NC","Neon Crystal"]
+];
+
+// ---- Array of unique game-style icons ----
+const icons = [
+  "https://cdn-icons-png.flaticon.com/512/616/616408.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616430.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616402.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616410.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616419.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616424.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616414.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616427.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616437.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616439.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616445.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616448.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616451.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616454.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616459.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616463.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616466.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616469.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616472.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616476.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616479.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616482.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616485.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616488.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616491.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616494.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616497.png",
+  "https://cdn-icons-png.flaticon.com/512/616/616500.png"
+];
+
+let coins = list.map((c,i)=>({
+    sym:c[0],
+    name:c[1],
+    img: icons[i % icons.length], // assign unique icon per coin
+    score:(Math.random()*9000+100).toFixed(2),
+    trend:(Math.random()*10-5).toFixed(2)
+}));
+
+function load(){
+    let html="";
+    coins.forEach(c=>{
+        let color = c.trend>=0 ? "green" : "red";
+        html += `
+        <div class="coin-box">
+            <div class="left">
+                <img src="${c.img}">
+                <div>
+                    <div class="symbol">${c.sym}</div>
+                    <div class="name">${c.name}</div>
+                </div>
+            </div>
+
+            <div style="text-align:right;">
+                <div class="score">Score: ${Number(c.score).toLocaleString()}</div>
+                <div class="trend ${color}">${c.trend}% Trend</div>
+            </div>
+        </div>`;
+    });
+
+    document.getElementById("coins").innerHTML = html;
+}
+
+load();
+
+// live virtual update (visual only)
+setInterval(()=>{
+    coins.forEach(c=>{
+        c.score = (parseFloat(c.score) + (Math.random()*20 - 10)).toFixed(2);
+        c.trend = (Math.random()*10 - 5).toFixed(2);
+    });
+    load();
+}, 1200);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+<style>
+.disclaimer {
+  text-align: center;
+  font-size: 12px;
+  color: gold;
+  margin: 12px 8px 20px;
+  opacity: 0.85;
+  animation: glowGold 3s ease-in-out infinite;
+}
+
+@keyframes glowGold {
+  0%   { color: #bfa200; opacity: 0.6; }
+  50%  { color: #ffd700; opacity: 1; }
+  100% { color: #bfa200; opacity: 0.6; }
+}
+</style>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coin generator</title>
+  <!-- Import Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(to right, #d4af37, #c0c0c0); /* gold to silver */
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    /* Header and Navigation */
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links li {
+      margin: 0 15px;
+    }
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    .nav-links li a:hover {
+      color: #ffd700;
+    }
+    /* Hero Section */
+    .hero {
+      background: url('https://source.unsplash.com/1600x900/?coin, system') no-repeat center center/cover;
+      height: 400px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+    }
+    .hero-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .hero h1 {
+      font-size: 48px;
+      margin: 0;
+    }
+    .hero p {
+      font-size: 20px;
+      margin: 10px 0 20px;
+    }
+    .cta-btn {
+      font-size: 18px;
+      padding: 10px 20px;
+      background: #ffd700;
+      border: none;
+      border-radius: 5px;
+      color: #000;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .cta-btn:hover {
+      background: #e6c200;
+    }
+    /* Main Container */
+    .container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .balance-box, .referral-box, .daily-box {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 20px 0;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .mine-btn, .btn {
+      font-size: 18px;
+      padding: 10px 20px;
+      background: #ffd700;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 10px;
+      transition: background 0.3s;
+    }
+    .mine-btn:hover, .-btn:hover {
+      background: #e6c200;
+    }
+    .-box {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .methods {
+      display: none;
+      margin-top: 10px;
+    }
+    .ticker {
+      font-size: 18px;
+      background: #000;
+      color: #ffd700;
+      padding: 5px;
+      margin-top: 20px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    /* Footer */
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .footer p {
+      margin: 5px 0;
+    }
+    .footer a {
+      color: #ffd700;
+      text-decoration: none;
+    }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+      .nav-links li {
+        margin: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+    
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-overlay">
+      <p> <style>
+/* Big attention animation */
+@keyframes pulseReward {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.06); opacity: 0.95; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.daily-reward {
+  text-align: center;
+  animation: pulseReward 3s ease-in-out infinite;
+}
+
+/* Yellow title */
+.daily-reward h2 {
+  color: #FFD700; /* yellow */
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Orange article text */
+.daily-reward p {
+  color: #FF8C00; /* orange */
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 500;
+}
+</style>
+
+<div class="daily-reward">
+  <h2>🎁 Daily Reward 🎁</h2>
+  <p>
+    Check in every day to claim your special reward 🌞✨<br>
+    Collect coins, bonuses, or points just for coming back 🎉<br>
+    Stay active daily and enjoy exciting rewards waiting for you 🚀
+  </p>
+</div></p>
+      <a href="#" class="cta-btn">MOVE TO TOP </a>
+    </div>
+  </section>
+  
+  
+    
+    
+    
+        
+    <div class="daily-reward-container">
+  <h1 class="daily-title">Daily Reward</h1>
+  <p id="daily-text">Your daily reward is ready. Come back every day to collect coins🪙, level up your progress power, and unlock exclusive bonuses⚡ Don’t miss out.</p>
+</div>
+
+<style>
+.daily-reward-container {
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: transparent; /* Transparent, main background will show */
+}
+
+.daily-title {
+  color: red;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Lemon green static text */
+#daily-text {
+  font-size: 22px;         /* Slightly bigger for readability */
+  font-weight: bold;
+  color: #32CD32;          /* True lemon green color */
+  display: inline-block;
+  max-width: 90%;
+  line-height: 1.5;
+  text-align: center;
+}
+</style>
+    
+    
+
+
+    <div class="balance-box">
+      <p> <style>
+.spin-text h2 {
+  color: #8B0000; /* deep red */
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.spin-text p {
+  color: #722F37; /* wine color */
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 500;
+  text-align: center;
+}
+</style>
+
+<div class="spin-text">
+  <h2>🎡 Spin Wheel 🎡</h2>
+  <p>
+    Spin the wheel to unlock exciting in-app rewards 🍷✨<br>
+    Each spin gives you a chance to collect coins, points, or bonuses 🎁<br>
+    Enjoy a fun, fair, and engaging experience every time you play 🚀
+  </p>
+</div>  </span> </p>
+    </div>
+        
+    <button class="mine-btn" onclick="minecoin()"><style>
+/* Container */
+.more-reward {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Title */
+.more-reward h2 {
+  color: #FFD700; /* yellow title */
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Pro Premium Button */
+.reward-btn {
+  background-color: #28a745; /* green background */
+  color: #FF0000; /* red text */
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 40px;
+  border: 2px solid #FF0000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  text-transform: uppercase;
+}
+
+/* Hover effect */
+.reward-btn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* Blinking animation */
+@keyframes blinkLight {
+  0% {
+    color: #FF0000;
+    background-color: #28a745;
+    transform: translateY(0);
+  }
+  25% {
+    color: #FF0000;
+    background-color: #00FF00;
+    transform: translateY(-6px);
+  }
+  50% {
+    color: #FF0000;
+    background-color: #28a745;
+    transform: translateY(6px);
+  }
+  75% {
+    color: #FF0000;
+    background-color: #00FF00;
+    transform: translateY(-6px);
+  }
+  100% {
+    color: #FF0000;
+    background-color: #28a745;
+    transform: translateY(0);
+  }
+}
+
+/* Active animation */
+.reward-btn.active {
+  animation: blinkLight 1s ease-in-out infinite;
+}
+</style>
+  <button class="reward-btn" onclick="goTop(this)">
+    More Rewarded for Today 👆
+  </button>
+</div>
+
+<script>
+function goTop(btn) {
+  // Start blinking animation
+  btn.classList.add("active");
+
+  // Scroll to top
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+  // Stop animation after 3 seconds
+  setTimeout(() => {
+    btn.classList.remove("active");
+  }, 3000);
+}
+</script> </button>
+
+    
+    <div class="referral-box" id="referrals">
+      <h2> Reward style</h2>
+      <p>Start your fun adventure with a single tap 🌟
+Collect coins automatically as you play through smooth, secure progress cycles. Upgrade your power, collect daily rewards, and enjoy a simple, fast, and engaging game experience designed just for you. 🚀✨</p>
+    </div>
+
+    <div class="daily-box">
+      <h2>Daily Bonus</h2>
+      <p>Novaspin is all about fun and rewards Your daily points and coins are virtual
+      You automatically receive
+      
+               0.000000500 Coins every day          
+               gift from Novaspin 🎰
+          </p>
+    </div>
+  </div>
+
+
+
+
+<!-- Weekly Vibes Professional Embed Start -->
+<div id="weekly-vibes-widget">
+  <h2 style="text-align:center;">✨ Weekly Vibes ✨</h2>
+  <p style="text-align:center;">
+  <h2 style="font-size:32px; font-weight:bold; text-align:center; color:#dfff00;">
+    Tap a day and answer the question
+  </h2>
+</p>
+  <!-- Day Menu -->
+  <div class="wv-menu">
+    <button data-day="Monday">Monday</button>
+    <button data-day="Tuesday">Tuesday</button>
+    <button data-day="Wednesday">Wednesday</button>
+    <button data-day="Thursday">Thursday</button>
+    <button data-day="Friday">Friday</button>
+    <button data-day="Saturday">Saturday</button>
+    <button data-day="Sunday">Sunday</button>
+  </div>
+
+  <!-- Card -->
+  <div class="wv-card">
+    <div id="wv-question" class="wv-animated-text"></div>
+    <div id="wv-hint" style="opacity:.8;margin:10px 0;"></div>
+    <input id="wv-answer" placeholder="Type your answer">
+    <br>
+    <button id="wv-sendBtn" class="wv-send">Send</button>
+  </div>
+</div>
+
+<style>
+/* Scoped CSS */
+#weekly-vibes-widget {font-family:Arial,sans-serif;margin:20px;}
+#wv-answer{width:80%;padding:10px;border-radius:8px;border:none;font-size:16px;margin-top:10px;}
+#wv-sendBtn{margin-top:10px;padding:10px 20px;border:none;border-radius:10px;background:#888;color:#fff;font-size:16px;}
+#wv-sendBtn.enabled{background:#00e676;color:#000;cursor:pointer;}
+.wv-menu{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:20px;}
+.wv-menu button{border:none;padding:12px 16px;border-radius:30px;font-weight:bold;cursor:pointer;color:#fff;position:relative;background:#444;transition:0.3s;}
+.wv-menu button:hover{transform:scale(1.05);}
+.wv-menu button::after{content:"";position:absolute;inset:-4px;border-radius:inherit;filter:blur(8px);z-index:-1;animation:wv-glowRotate 4s linear infinite;}
+.wv-menu button:nth-child(1)::after{background:#87ceeb;}
+.wv-menu button:nth-child(2)::after{background:#ffd700;}
+.wv-menu button:nth-child(3)::after{background:#c0c0c0;}
+.wv-menu button:nth-child(4)::after{background:#8a2be2;}
+.wv-menu button:nth-child(5)::after{background:#1e90ff;}
+.wv-menu button:nth-child(6)::after{background:#9acd32;}
+.wv-menu button:nth-child(7)::after{background:#ff4d4d;}
+@keyframes wv-glowRotate{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.wv-card{max-width:420px;margin:auto;background:#1b1f45;padding:20px;border-radius:16px;box-shadow:0 0 20px rgba(255,255,255,.1);}
+.wv-animated-text span{display:inline-block;margin-right:4px;animation:wv-slideIn .6s ease forwards, wv-glow 2s infinite alternate;opacity:0;}
+@keyframes wv-slideIn{from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@keyframes wv-glow{from{text-shadow:0 0 5px #fff;}to{text-shadow:0 0 15px #00eaff;}}
+.wv-popup{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);font-size:36px;animation:wv-pop 2s ease forwards;}
+@keyframes wv-pop{0%{opacity:0;transform:translate(-50%,20px) scale(.8);}50%{opacity:1;transform:translate(-50%,-20px) scale(1.1);}100%{opacity:0;transform:translate(-50%,-80px) scale(1);}}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+const questionEl=document.querySelector("#wv-question");
+const hintEl=document.querySelector("#wv-hint");
+const answerEl=document.querySelector("#wv-answer");
+const sendBtn=document.querySelector("#wv-sendBtn");
+
+const daysData={
+Monday:{texts:["How is your Monday going?","Monday mood check!","Feeling productive today?"],hint:"sleep/playful",answers:{sleep:"😴",playful:"🎉"}},
+Tuesday:{texts:["What's your Tuesday plan?","Tuesday energy?","Feeling focused?"],hint:"work/relax",answers:{work:"💼",relax:"🛋️"}},
+Wednesday:{texts:["Midweek energy check?","Happy Wednesday!","How's your day going?"],hint:"strong/tired",answers:{strong:"💪",tired:"😴"}},
+Thursday:{texts:["How's your Thursday mood?","Thursday vibes?","Feeling calm or active?"],hint:"calm/active",answers:{calm:"🌿",active:"⚡"}},
+Friday:{texts:["What's your Friday plan?","Friday fun time!","Excited for the weekend?"],hint:"party/movie",answers:{party:"🥳",movie:"🎬"}},
+Saturday:{texts:["Weekend style today?","Saturday chill?","What are you up to?"],hint:"travel/home",answers:{travel:"🏖️",home:"🏠"}},
+Sunday:{texts:["How do you want to enjoy your Sunday?","Sunday relaxation?","Your Sunday vibe?","What makes your Sunday special?"],hint:"rest/prepare",answers:{rest:"😌",prepare:"📋"}}
+};
+
+let currentDay=null;
+let dayIndex={};
+
+function animateText(el,text){
+  el.innerHTML="";
+  [...text].forEach((ch,i)=>{
+    const span=document.createElement("span");
+    span.textContent=ch;
+    span.style.color=["#87ceeb","#ff4d4d","#00ff99","#ffd700","#c77dff"][i%5];
+    span.style.animationDelay=(i*0.05)+"s";
+    el.appendChild(span);
+  });
+}
+
+document.querySelectorAll("#weekly-vibes-widget .wv-menu button").forEach(btn=>{
+  btn.addEventListener("click",function(){
+    currentDay=this.dataset.day;
+    if(!dayIndex[currentDay]) dayIndex[currentDay]=0;
+    const texts=daysData[currentDay].texts;
+    animateText(questionEl,texts[dayIndex[currentDay]]);
+    hintEl.textContent="Type: "+daysData[currentDay].hint;
+    answerEl.value="";
+    disableSend();
+    dayIndex[currentDay]=(dayIndex[currentDay]+1)%texts.length;
+  });
+});
+
+function validateInput(){
+  if(!currentDay) return;
+  const val=answerEl.value.toLowerCase();
+  if(daysData[currentDay].answers[val]) enableSend();
+  else disableSend();
+}
+
+function enableSend(){
+  sendBtn.classList.add("enabled");
+  sendBtn.onclick=sendAnswer;
+}
+
+function disableSend(){
+  sendBtn.classList.remove("enabled");
+  sendBtn.onclick=null;
+}
+
+function sendAnswer(){
+  // Loud sound
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const osc=ctx.createOscillator();
+  osc.frequency.value=800;
+  osc.connect(ctx.destination);
+  osc.start();
+  setTimeout(()=>{osc.stop();ctx.close();},200);
+
+  const val=answerEl.value.toLowerCase();
+  const pop=document.createElement("div");
+  pop.className="wv-popup";
+  pop.textContent=daysData[currentDay].answers[val]+" "+val;
+  document.body.appendChild(pop);
+  setTimeout(()=>pop.remove(),2000);
+  answerEl.value="";
+  disableSend();
+}
+
+answerEl.addEventListener("input",validateInput);
+});
+</script>
+<!-- Weekly Vibes Professional Embed End -->
+
+
+
+
+
+</style>
+
+  <script>
+    
+
+    
+
+    creditDailyBonus();
+  </script>
+</body>
+</html>
+<!-- Footer --> 
+<div class="footer" id="contact">
+  <p><strong>
+  
+      
+
+<!-- ====== PREMIUM ROLLING COINS (SAFE & ISOLATED) ====== -->
+<div id="premium-coin-rollers">
+
+<style>
+#premium-coin-rollers,
+#premium-coin-rollers * {
+    box-sizing: border-box;
+}
+
+/* Container */
+#premium-coins-rollers {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+/* Coins size (SMALLER NOW) */
+.rolling-Coins {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    animation: CoinsMove 3.3s ease-in-out infinite alternate,
+               CoinsGlow 1.8s ease-in-out infinite;
+}
+
+/* Pure CSS colors */
+.Coins-gold {
+    background: radial-gradient(circle, #ffd700, #b8860b);
+    box-shadow: 0 0 10px #ffd700;
+}
+
+.Coins-green {
+    background: radial-gradient(circle, #ccff33, #5aa600);
+    box-shadow: 0 0 10px #ccff33;
+}
+
+.Coins-silver {
+    background: radial-gradient(circle, #e6e6e6, #9c9c9c);
+    box-shadow: 0 0 10px #e6e6e6;
+}
+
+/* Rolling animation rotation */
+.rolling-Coins::before {
+    content: "⊚";
+    font-size: 20px;
+    color: black;
+    font-weight: 900;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: CoinsRotate 1s linear infinite;
+}
+
+/* Rotation */
+@keyframes CoinsRotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Go & come animation */
+@keyframes CoinsMove {
+    0% { transform: translateX(-20px); }
+    100% { transform: translateX(20px); }
+}
+
+/* Premium Light–Dark Glow animation */
+@keyframes CoinsGlow {
+    0% { filter: brightness(0.6); }
+    50% { filter: brightness(1.8); }
+    100% { filter: brightness(0.6); }
+}
+</style>
+
+<!-- THREE ROLLING COINS -->
+<div class="rolling-Coins Coins-gold"></div>
+<div class="rolling-Coins Coins-green"></div>
+<div class="rolling-Coins Coins-silver"></div>
+
+</div>
+<!-- ====== END PREMIUM ROLLING COINS ====== -->
+      
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novaspin Play – Virtual Coins</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Segoe UI, Arial, sans-serif;
+    background:#0b0f1a;
+    color:#fff;
+    text-align:center;
+}
+
+h1{
+    margin:20px 0;
+    color:#f5c542;
+    letter-spacing:1px;
+}
+
+.coins{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    padding:20px;
+    max-width:420px;
+    margin:auto;
+}
+
+.coin{
+    background:#131a2e;
+    border-radius:20px;
+    padding:18px 10px;
+    box-shadow:0 10px 25px rgba(0,0,0,.5);
+    transition:.25s;
+}
+
+.coin:hover{
+    transform:translateY(-6px);
+}
+
+.coin-icon{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:700;
+    color:#0b0f1a;
+    box-shadow:inset 0 0 10px rgba(255,255,255,.4);
+}
+
+.gold{ background:radial-gradient(circle,#fff3b0,#d4a017); }
+.blue{ background:radial-gradient(circle,#b3f0ff,#2aa8ff); }
+.purple{ background:radial-gradient(circle,#e0c3ff,#7b4dff); }
+.green{ background:radial-gradient(circle,#baffd8,#1fbf75); }
+.orange{ background:radial-gradient(circle,#ffd1a1,#ff8c00); }
+.red{ background:radial-gradient(circle,#ffb3b3,#ff3b3b); }
+.cyan{ background:radial-gradient(circle,#c9fff7,#00c9c9); }
+.lime{ background:radial-gradient(circle,#ecffb0,#8bc34a); }
+
+.name{
+    margin-top:10px;
+    font-weight:600;
+    color:#f5c542;
+}
+
+.code{
+    font-size:12px;
+    color:#9aa4c7;
+}
+
+.note{
+    font-size:13px;
+    color:#b6bfdc;
+    max-width:480px;
+    margin:20px auto;
+    padding:0 15px;
+}
+
+.footer{
+    font-size:13px;
+    color:#8e96b5;
+    margin:20px 0 25px;
+}
+</style>
+</head>
+
+<body>
+
+
+
+<h1>NOVASPIN</h1>
+
+<div class="coins">
+
+    <div class="coin">
+        <div class="coin-icon gold">Q</div>
+        <div class="name">Qava Coin</div>
+        <div class="code">QVA</div>
+    </div>
+
+    <div class="coin">
+        <div class="coin-icon blue">Z</div>
+        <div class="name">Zynex Coin</div>
+        <div class="code">ZNX</div>
+    </div>
+
+    <div class="coin">
+        <div class="coin-icon purple">O</div>
+        <div class="name">Orbix Coin</div>
+        <div class="code">ORX</div>
+    </div>
+
+    <div class="coin">
+        <div class="coin-icon green">N</div>
+        <div class="name">Nexa Coin</div>
+        <div class="code">NEX</div>
+    </div>
+
+    <div class="coin">
+        <div class="coin-icon orange">L</div>
+        <div class="name">Lumet Coin</div>
+        <div class="code">LMT</div>
+    </div>
+
+    <div class="coin">
+        <div class="coin-icon red">K</div>
+        <div class="name">Kryon Coin</div>
+        <div class="code">KRN</div>
+    </div>
+
+    <div class="coin">
+        <div class="coin-icon cyan">V</div>
+        <div class="name">Velox Coin</div>
+        <div class="code">VLX</div>
+    </div>
+
+    <div class="coin">
+        <div class="coin-icon lime">D</div>
+        <div class="name">Deltix Coin</div>
+        <div class="code">DLX</div>
+    </div>
+
+</div>
+
+<div class="note">
+</div>
+
+</body>
+</html>
+
+
+
+
+<div id="idle-game" style="max-width:420px;margin:auto;padding:20px;color:#fff;">
+
+  <h2 style="text-align:center;color:#ff5fa2;font-weight:bold;">
+    🎮 IDLE GAME
+  </h2>
+
+  <p style="text-align:center;font-size:16px;margin-bottom:20px;">
+    
+    <b id="" style="color:#00ffcc;"></b>
+  </p>
+
+  <!-- ITEMS -->
+  <div class="In-App Features-item">
+    <span>🔥 Extra Action Attempt</span>
+    <button onclick="In-App Features(10,'Extra Action Attempt')">10</button>
+  </div>
+
+  <div class="In-App Features-item">
+    <span>⚡ 2× Rewards (30 mins)</span>
+    <button onclick="In-App Features(15,'2× Rewards Boost')">15</button>
+  </div>
+
+  <div class="In-App Features-item">
+    <span>🎨 Premium Theme</span>
+    <button onclick="In-App Features(20,'Premium Theme')">20</button>
+  </div>
+
+  <div class="In-App Features-item">
+    <span>🎡 Auto Spin</span>
+    <button onclick="In-App Features(25,'Auto Spin Feature')">25</button>
+  </div>
+
+  <div class="In-App Features-item">
+    <span>💎 Profile Badge</span>
+    <button onclick="In-App Features(30,'Premium Badge')">30</button>
+  </div>
+
+  <div class="In-App Features-item">
+    <span>🧠 XP Power Boost</span>
+    <button onclick="In-App Features(35,'XP Boost')">35</button>
+  </div>
+
+  <p style="font-size:12px;opacity:.7;margin-top:20px;text-align:center;">
+  </p>
+</div>
+
+<!-- POPUP -->
+<div id="coinPopup"></div>
+
+<style>
+/* GAME ITEMS */
+.In-App Featuresm-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:12px 0;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.06);
+  font-size:15px;
+}
+
+.In-App Features-item button{
+  padding:8px 14px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(135deg,#ffd700,#ffb700);
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.In-App Features-item button:active{
+  transform:scale(0.95);
+}
+
+/* POPUP */
+#coinPopup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0.8);
+  background:rgba(0,0,0,0.9);
+  padding:18px 24px;
+  border-radius:14px;
+  font-size:16px;
+  color:#00ffcc;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  transition:all .3s ease;
+  z-index:9999;
+}
+
+#coinPopup.show{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
+}
+</style>
+
+<script>
+/* =========================
+   IDLE GAME CORE
+   ========================= */
+
+// Temporary coins (later link to generator coins balance)
+let coins = 1000000100;
+
+const coinEl = document.getElementById("coinBalance");
+const popup = document.getElementById("coinPopup");
+
+function updateCoinsUI(){
+  coinEl.textContent = coins.toLocaleString();
+}
+
+function showPopup(text){
+  popup.textContent = text;
+  popup.classList.add("show");
+  setTimeout(() => popup.classList.remove("show"), 1800);
+}
+
+
+
+updateCoinsUI();
+</script>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viral Share Rewards</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: white; /* keep your normal site background */
+      color: black;
+      text-align: center;
+      padding: 40px;
+    }
+
+    /* Viral Share Section */
+    #viral-share-section {
+      background: #b8860b; /* dark gold */
+      padding: 40px;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      margin: 40px auto;
+      max-width: 600px;
+      box-shadow: 0 0 25px gold;
+    }
+
+    #viral-share-section h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .viral-badge {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      box-shadow: 0 0 15px gold;
+    }
+
+    .viral-badge span {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .viral-badge img {
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .viral-badge img:hover {
+      transform: scale(1.2);
+    }
+
+    #rewardBox {
+      margin-top: 30px;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      color: gold;
+      display: none;
+      background: rgba(0,0,0,0.6);
+      border-radius: 10px;
+      box-shadow: 0 0 20px gold;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="viral-share-section">
+    <h1>🚀 MORE Coins🪙</h1>
+
+    <!-- Twitter -->
+    <div class="viral-badge">
+      <span style="color:#1e90ff;">Share on Twitter and get 20,000 Coins 🎁</span>
+      <a href="https://twitter.com/intent/tweet?text=💎+Earn+FREE+Coins!+🚀+Join+me+at+https://yourwebsite.com" target="_blank" onclick="giveReward()">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter">
+      </a>
+    </div>
+
+    <!-- Facebook -->
+    <div class="viral-badge">
+      <span style="color:#1877f2;">Share on Facebook and get 20,000 Coins 🎁</span>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com" target="_blank" onclick="giveReward()">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+      </a>
+    </div>
+
+    <!-- TikTok -->
+    <div class="viral-badge">
+      <span style="color:#ff0050;">Share on TikTok and get 20,000 Coins 🎁</span>
+      <a href="https://www.tiktok.com/" target="_blank" onclick="giveReward()">
+        <img src="https://cdn-icons-png.flaticon.com/512/3046/3046118.png" alt="TikTok">
+      </a>
+    </div>
+
+    <!-- WhatsApp -->
+    <div class="viral-badge">
+      <span style="color:#25d366;">Share on WhatsApp and get 20,000 Coins 🎁</span>
+      <a href="https://api.whatsapp.com/send?text=💎%20Earn%20FREE%20Coins!%20🚀%20Join%20me%20at%20https://yourwebsite.com" target="_blank" onclick="giveReward()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      </a>
+    </div>
+
+    <!-- Reward Box -->
+    <div id="rewardBox">🎉 You earned 20,000 Coins 🎁</div>
+  </div>
+
+  <script>
+    function giveReward() {
+      const box = document.getElementById("rewardBox");
+      box.style.display = "block";
+      box.innerText = "uncompleted 🎁";
+    }
+  </script>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        .stats-container {
+            width: 80%;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat {
+            margin: 20px 0;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #e67e22; /* Orange color */
+        }
+
+        p {
+            font-size: 18px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    
+    
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novaspin Simulator Dashboard</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0b0b0b, #141414);
+  color: #ffffff;
+  text-align: center;
+}
+
+.container {
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 15px 0;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+}
+
+.card img {
+  width: 50px;
+  height: 50px;
+  animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 3px gold);}
+  50% { transform: scale(1.1); filter: drop-shadow(0 0 8px orange);}
+  100% { transform: scale(1); filter: drop-shadow(0 0 3px gold);}
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  color: gold;
+  margin-bottom: 10px;
+}
+
+.label {
+  color: #cccccc;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #222;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 8px;
+  position: relative;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, gold, orange, gold);
+  transition: width 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0));
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  0% { left: -50%; }
+  100% { left: 100%; }
+}
+
+button {
+  margin: 10px;
+  padding: 14px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.start { background: #2ecc71; color: #000; }
+.stop { background: #e74c3c; color: #fff; }
+
+footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #aaaaaa;
+}
+
+.energy-card { border-color: #2ecc71; background: rgba(46, 204, 113, 0.05); }
+.score-card { border-color: #3498db; background: rgba(52, 152, 219, 0.05); }
+
+@media (max-width: 420px){
+  .card { flex-direction: column; align-items: center; gap: 10px; }
+  .card img { width: 40px; height: 40px; }
+  .title { font-size: 24px; }
+  button { width: 90%; font-size: 15px; }
+}
+
+/* Level-up floating animation */
+.level-up {
+  position: absolute;
+  font-weight: bold;
+  color: #ffde59;
+  font-size: 16px;
+  animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-30px); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="title">Novaspin Digital</div>
+  <p class="label">Fun Virtual Simulator — No Real Value</p>
+
+  <!-- Energy Level Card -->
+  <div class="card energy-card">
+    <img src="https://img.icons8.com/fluency/48/000000/lightning-bolt.png" alt="Energy Icon">
+    <div>
+      <div class="stat">Energy Level</div>
+      <div id="power">0.00 Units</div>
+      <div class="progress-bar">
+        <div class="progress" id="powerBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Session Score Card -->
+  <div class="card score-card" style="position: relative;">
+    <img src="https://img.icons8.com/fluency/48/000000/trophy.png" alt="Score Icon">
+    <div>
+      <div class="stat">Session Score</div>
+      <div id="progressValue">0 Points</div>
+    </div>
+  </div>
+
+  <button class="start" onclick="startSim()">Start Simulation</button>
+  <button class="stop" onclick="stopSim()">Stop</button>
+
+  <footer>
+    This simulator is for entertainment purposes only.<br>
+    No real earnings or financial value.<br><br>
+    © 2026 Novaspin
+  </footer>
+
+</div>
+
+<script>
+let running = false;
+let power = 0;
+let points = 0;
+let interval;
+
+function startSim() {
+  if (running) return;
+  running = true;
+
+  interval = setInterval(() => {
+    power += 0.05;
+    points += 5;
+
+    if (power > 10) power = 10;
+
+    document.getElementById("power").innerText = power.toFixed(2) + " Units";
+    document.getElementById("progressValue").innerText = points + " Points";
+    document.getElementById("powerBar").style.width = (power * 10) + "%";
+
+    // Level-Up Animation
+    const scoreCard = document.getElementById("progressValue");
+    const levelUp = document.createElement("div");
+    levelUp.className = "level-up";
+    levelUp.innerText = "+5";
+    scoreCard.parentElement.appendChild(levelUp);
+
+    setTimeout(() => levelUp.remove(), 1000);
+
+  }, 1000);
+}
+
+function stopSim() {
+  running = false;
+  clearInterval(interval);
+}
+</script>
+
+</body>
+</html>
+   
+   
+    
+</body>
+</html>
+
+</style>
+
+</body>
